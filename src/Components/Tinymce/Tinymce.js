@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react';
+import { TextField, Button } from '@mui/material';
+import './style.css'
 
-
-function App() {
-
-  const editorRef = useRef(null);
+const Tinymce = () => {
+    const editorRef = useRef(null);
+    const [email, setEmail] = useState('');
+    const handleEmailChange = (e)=>{
+      setEmail(e.target.value)
+      console.log(e.target.value);
+    }
   const log = () => {
     if (editorRef.current) {
       const content = editorRef.current.getContent();
@@ -17,16 +21,10 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ email,content }),
       })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          alert('success');
+          alert("email sent")
         })
         .catch(error => {
           alert('error');
@@ -35,12 +33,10 @@ function App() {
     }
   };
 
-  return (
 
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Editor
+  return (
+    <>
+    <Editor
           onInit={(evt, editor) => editorRef.current = editor}
           apiKey='tfyzrg3tr3jrtu9gumn98vndqvc0rsmqtajqnizirws42yde'
           init={{
@@ -56,11 +52,12 @@ function App() {
           }}
           initialValue="Welcome to TinyMCE!"
         />
-        <button onClick={log}>Log editor content</button>
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    </div>
-  );
+        <div className='box'>
+        <TextField id="outlined-basic" label="Send to" variant="outlined" required onChange={handleEmailChange} />
+        <Button variant="contained" onClick = {log}>Send</Button>
+        </div>
+        </>
+  )
 }
 
-export default App;
+export default Tinymce

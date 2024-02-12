@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Tinymce from './Components/Tinymce/Tinymce';
+import Chatgpt from './Components/Chatgpt/Chatgpt';
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element: <Tinymce/>
+  },
+  {
+    path:"/chat",
+    element: <Chatgpt/>
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

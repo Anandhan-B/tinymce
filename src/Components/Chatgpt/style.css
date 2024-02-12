@@ -1,0 +1,13 @@
+.box{
+    display: flex;
+    gap:20px;
+    margin: 20px;
+    align-items: center;
+}
+.area{
+    margin: 20px;
+    width: 50%;
+}
+.prompt{
+    width: 500px;
+}

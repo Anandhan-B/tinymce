@@ -2,20 +2,26 @@ import React, { useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react';
 import { TextField, Button } from '@mui/material';
+import swal from 'sweetalert2';
+import axios from 'axios';
 import './style.css'
 
 const Tinymce = () => {
     const editorRef = useRef(null);
     const [email, setEmail] = useState('');
-    const handleEmailChange = (e)=>{
-      setEmail(e.target.value)
-      console.log(e.target.value);
-    }
-  const log = () => {
+    
+    const validateEmail = (email) => {
+      return String(email)
+          .toLowerCase()
+          .match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  };
+  const sendMail = (e) => {
+    e.preventDefault();
     if (editorRef.current) {
+     
+      if(email && validateEmail(email)){
       const content = editorRef.current.getContent();
-      console.log(content);
-
+      //console.log(content);
       fetch('http://localhost:7000/api/v1/user/mail', {
         method: 'POST',
         headers: {
@@ -24,11 +30,29 @@ const Tinymce = () => {
         body: JSON.stringify({ email,content }),
       })
         .then(response => {
-          alert("email sent")
+          return response.text()
+        }).then((message)=>{
+          swal.fire({
+            title: "Success",
+            text: message,
+            icon: "success",
+          });
         })
         .catch(error => {
-          alert('error');
+          swal.fire({
+            title: "Error",
+            text: error,
+            icon: "error",
+          });       
         });
+      }
+      else{
+        swal.fire({
+          title: "Error",
+          text: "Enter Valid Email",
+          icon: "error",
+        });
+      }
 
     }
   };
@@ -36,6 +60,7 @@ const Tinymce = () => {
 
   return (
     <>
+    <form action="" onSubmit={sendMail}>
     <Editor
           onInit={(evt, editor) => editorRef.current = editor}
           apiKey='tfyzrg3tr3jrtu9gumn98vndqvc0rsmqtajqnizirws42yde'
@@ -48,14 +73,36 @@ const Tinymce = () => {
               { value: 'First.Name', title: 'First Name' },
               { value: 'Email', title: 'Email' },
             ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.resolve(
+                axios.post('http://localhost:7000/api/v1/user/chat',{ "prompt": request } )
+                .then((response)=>{
+                    if(!(response.status === 200)){
+                      swal.fire({
+                        title:"Error",
+                        text:response.data,
+                        icon:"error"
+                      })
+                      return
+                    }
+                    return response.data
+                }).catch((err)=>{
+                  swal.fire({
+                    title:"Error",
+                    text: err.message,
+                    icon:"error"
+                  })
+                })
+            )),
           }}
-          initialValue="Welcome to TinyMCE!"
+          initialValue="Write Your Email here"
+         
         />
+        
         <div className='box'>
-        <TextField id="outlined-basic" label="Send to" variant="outlined" required onChange={handleEmailChange} />
-        <Button variant="contained" onClick = {log}>Send</Button>
+        <TextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
+        <Button variant="contained" type='submit'>Send</Button> 
         </div>
+        </form>
         </>
   )
 }

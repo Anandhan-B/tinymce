@@ -3,3 +3,12 @@
     gap: 20px;
     margin: 20px;
 }
+.subject{
+    margin: 20px;
+}
+.sub{
+    width: 500px;
+    font-size: 13pt;
+    height: 20px;
+    padding: 1%;
+}

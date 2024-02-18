@@ -9,6 +9,7 @@ import './style.css'
 const Tinymce = () => {
     const editorRef = useRef(null);
     const [email, setEmail] = useState('');
+    const [subject, setSubject] = useState('');
     
     const validateEmail = (email) => {
       return String(email)
@@ -27,7 +28,7 @@ const Tinymce = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email,content }),
+        body: JSON.stringify({ email, subject, content }),
       })
         .then(response => {
           return response.text()
@@ -61,6 +62,9 @@ const Tinymce = () => {
   return (
     <>
     <form action="" onSubmit={sendMail}>
+      <div className="subject">
+        <input className='sub' type="text" onChange={(e)=> setSubject(e.target.value)} placeholder='Enter the Subject' required />
+    </div>
     <Editor
           onInit={(evt, editor) => editorRef.current = editor}
           apiKey='tfyzrg3tr3jrtu9gumn98vndqvc0rsmqtajqnizirws42yde'

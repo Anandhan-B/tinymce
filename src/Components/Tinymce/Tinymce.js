@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { TextField, Button } from '@mui/material';
 import swal from 'sweetalert2';
 import axios from 'axios';
-import './style.css'
+import './tinymce.css'
 
 const Tinymce = () => {
     const editorRef = useRef(null);

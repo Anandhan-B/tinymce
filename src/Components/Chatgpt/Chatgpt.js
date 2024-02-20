@@ -1,6 +1,6 @@
 import { Button, TextField, TextareaAutosize } from '@mui/material'
 import React, { useState } from 'react'
-import './style.css'
+import './chatgpt.css'
 
 
 const Chatgpt = () => {

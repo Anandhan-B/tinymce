@@ -1,0 +1,48 @@
+#forget-body{
+    display: grid;
+    place-content: center;
+    background: #dde6ed;
+}
+#title{
+    color: #27374d;
+    position: relative;
+    top: 70px;
+}
+#forget{
+    display: flex;
+    gap: 20px;
+    border: none; 
+    background: #fff;
+    flex-direction: column;
+    border-radius: 7px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(245, 245, 245) 0px 5px 15px;
+    opacity: 0.8;
+    border-radius: 12px;
+    width: 400px;
+    height: 400px;
+    margin-top: 90px; 
+}
+#for-email{    
+    position: relative;
+    top: 110px;
+    height: auto;
+    width: 250px;
+    margin: auto;
+}
+
+#for-btn{
+        width: 110px;
+        height: 40px;
+        margin: auto;
+       top: 10px;
+        color: #dde6ed;
+        background-color: #27374d;
+    }
+
+    #for-btn:hover{
+       transform: scale(1.1);
+        color: #dde6ed;
+        background-color: #27374d;
+    }

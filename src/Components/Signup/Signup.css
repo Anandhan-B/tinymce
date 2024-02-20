@@ -1,0 +1,81 @@
+#body{
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    gap: 15px;
+    margin: 0%;
+    padding: 0;
+    background: #dde6ed;
+}
+#h2-sign{
+    font-size: 35px;
+    position: relative;
+    bottom: 40px;
+    right: 10px;
+    width: 90px;
+    height: 40px;
+    margin: auto;
+    color:#27374d
+}
+#underline{
+    position: relative;
+    bottom: 30px;
+    width: 69px;
+    height: 4px;
+    background-color:#27374d;
+    border-radius: 9px;
+    margin: auto;
+}
+#mail-log{
+    width: 250px;
+}
+
+#chk-log{
+    position: relative;
+    left: 5px;
+    bottom: 16px;
+}
+#rem-log{
+    position: relative;
+    bottom: 44px;
+    left: 24px;
+}
+#log-rc-flex{
+    display: flex;
+    flex-wrap:wrap ;
+    justify-content: space-between;
+}
+
+#lock{
+    color:#27374d;
+}
+#fgt{
+    text-align: end;
+    text-decoration: none;
+    position: relative;
+    top: -10px;
+}
+#btn-signin{
+    width: 110px;
+    height: 40px;
+    margin: auto;
+    position: relative;
+    bottom: 1px;
+    color: #dde6ed;
+    background-color: #27374d;
+}
+
+#al-sign{
+    position: relative;
+    top: 1px;
+}
+#sign-log{
+    position: relative;
+    top: 1px;
+    text-decoration: none;
+    font-weight: bold;
+    color:  #27374d;
+}
+#aup-log{
+    margin: auto;
+}

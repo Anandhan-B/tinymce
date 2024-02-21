@@ -11,8 +11,8 @@ const Sidebar = () => {
   return (
     <div className='body'>
 
-      <div className='menu'>
-        <div className='logo'>
+      <div className='menu '>
+        <div className='logo active'>
             <MdOutlineDashboard className='logo-icon' />
             <h2>Dashboard</h2>
         </div>

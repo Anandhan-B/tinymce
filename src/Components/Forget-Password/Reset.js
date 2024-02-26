@@ -43,7 +43,7 @@ function Reset() {
     if(!token) return swal.fire('Error','Session Expired, try again later','error')
     try {
       const response = await axios.post(
-        "http://localhost:7000/api/v1/user/reset-password",{password},{
+        "http://localhost:7000/api/v1/user/new-password",{password},{
         headers: {
           'Authorization': `Bearer ${token}`
         }}

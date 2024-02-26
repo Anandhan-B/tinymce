@@ -1,8 +1,8 @@
 #otp-body{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 213, 255, 0.808);
+    display: grid;
+    place-content: center;
+    background: #dde6ed;
+    min-height: 100dvh;
 }
 #otp{
     display: flex;
@@ -17,10 +17,34 @@
     border-radius: 12px;
     height: 400px;
     width: 500px;
-    margin-top: 60px;
-    margin-left: 500px;
 }
 #otp-input{
     position: relative;
-    width: 400px;
+    width: 250px;
+}
+.otp-verify{
+    color: #dde6ed;
+    background: #27374d;
+    width: 110px;
+    height: 40px;
+    margin: auto;
+}
+.otp-verify:hover{
+    transform: scale(1.1);
+    color: #dde6ed;
+    background-color: #27374d;
+}
+.otp-head{
+    font-size: 24px;
+    font-weight: 600;
+    color: #27374d;
+}
+.otp-content{
+    color: #27374d;
+}
+.otp-resendtime{
+    color: #27374d;
+}
+.otp-resend{
+    color: #27374d;
 }

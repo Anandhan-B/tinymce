@@ -2,9 +2,17 @@
     display: grid;
     place-content: center;
     background: #dde6ed;
+    min-height:100dvh;
 }
 #title{
-    color: #27374d;
+    color: #27374d; 
+} 
+.for-t-t{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
     position: relative;
     top: 70px;
 }
@@ -21,15 +29,14 @@
     opacity: 0.8;
     border-radius: 12px;
     width: 400px;
-    height: 400px;
-    margin-top: 90px; 
+    height: 330px;
 }
 #for-email{    
-    position: relative;
-    top: 110px;
+     position: relative;
+     /* top: 110px;  */
     height: auto;
     width: 250px;
-    margin: auto;
+    /* margin: auto;  */
 }
 
 #for-btn{

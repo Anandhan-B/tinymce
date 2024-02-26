@@ -2,49 +2,92 @@ import { Button, TextField, Typography } from '@mui/material'
 import React from 'react'
 import './Reset.css'
 import { useState } from 'react'
-import Swal from 'sweetalert2'
+import swal from 'sweetalert2'
+import { styled } from '@mui/system';
+import axios from 'axios';
+
+const MyTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiInputBase-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: '#27374d', // Focused border color
+    },
+    '&.Mui-focused .MuiInputLabel-root': {
+      color: '#27374d', // Focused label color
+    },
+  },
+}));
+
+
 
 function Reset() {
   const [password, setPassword] = useState()
-  const [resetpassword, setResetpassword] = useState()
-  const reset = async () => {
+  const [confirmpassword, setConfirmpassword] = useState()
+  const resetPass = async () => {
 
-    if (!password || !resetpassword) {
-      Swal.fire('Error', 'Please enter all the fields', 'error')
+    if (!password || !confirmpassword) {
+      swal.fire('Error', 'Please enter all the fields', 'error')
       return
     }
 
-    if(password.length < 8){
-      Swal.fire('Error','Password must in 8 Characters','error')
+    if(password.length < 6){
+      swal.fire('Error','Password must in 6 Characters','error')
       return
     }
 
-    if(password !== resetpassword){
-      Swal.fire('Error','Password does not match','error')
+
+    if(password !== confirmpassword){
+      swal.fire('Error','Password does not match','error')
       return
+    }
+    const token = localStorage.getItem("resetToken")
+    if(!token) return swal.fire('Error','Session Expired, try again later','error')
+    try {
+      const response = await axios.post(
+        "http://localhost:7000/api/v1/user/reset-password",{password},{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }}
+      );
+     
+      swal.fire({
+        title: "Success",
+        text: response.data,
+        icon: "success",
+        timer: 3000,
+      });
+      
+      window.location.href = '/login';
+    } catch (error) {
+      if (error.response.status) {
+        swal.fire({
+          title: error.response.statusText,
+          text: error.response.data,
+          icon: "error",
+        });
+      } else {
+        swal.fire({ title: "Error", text: error.message, icon: "error" });
+      }
     }
 
   }
   return (
     <div id='reset-body'>
       <div id='reset'>
-        <Typography variant='h5'>Reset your Password</Typography>
-        <TextField
-          id=''
-          label='New Password'
+        <p className='reset-head'>Reset your Password</p>
+        <MyTextField
+          id='new-pass'
+          label='New-Password'
           variant='outlined'
-          value={password}
           onChange={(e) => setPassword(e.target.value)} />
 
-        <TextField
-          id=''
-          label='Reset Password'
+        <MyTextField
+          id='con-pass'
+          label='Confirm-Password'
           variant='outlined'
           type='password'
-          value={resetpassword}
-          onChange={(e) => setResetpassword(e.target.value)}
+          onChange={(e) => setConfirmpassword(e.target.value)}
         />
-        <Button variant='contained' onClick={reset} color='primary'>Change</Button>
+        <Button className='btn-reset' variant='contained' onClick={resetPass} >Change Password</Button>
       </div>
     </div>
   )

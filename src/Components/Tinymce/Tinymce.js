@@ -67,7 +67,7 @@ const Tinymce = () => {
     </div>
     <Editor
           onInit={(evt, editor) => editorRef.current = editor}
-          apiKey='tfyzrg3tr3jrtu9gumn98vndqvc0rsmqtajqnizirws42yde'
+          apiKey='qp0heog9dajv9y1me4lgf5l9layggufynvqbwsbyd26rbt8t'
           init={{
             plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',

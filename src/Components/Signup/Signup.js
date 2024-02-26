@@ -53,12 +53,7 @@ const Signup = () => {
             password,
           }
         );
-        if (response.status !== 200)
-          return swal.fire({
-            title: response.statusText,
-            text: response.data,
-            icon: "error",
-          });
+       
         swal.fire({
           title: "Success",
           text: response.data.message,
@@ -66,6 +61,8 @@ const Signup = () => {
           timer: 3000,
         });
         localStorage.setItem("bulkmailusertoken", response.data.token);
+        window.location.href = '/dashboard'
+
       } catch (error) {
         if (error.response.status) {
           swal.fire({

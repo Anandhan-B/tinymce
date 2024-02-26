@@ -7,7 +7,6 @@ const Content = () => {
   return (
     <div className='content'>
         <ContentHeader />
-        <Card />
         <TeacherList />
     </div>
   )

@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import Content from "./Content/Content";
 import Profile from "./Content/Profile";
 import Tinymce from "../Tinymce/Tinymce";
+import ContentHeader from "../Dashboard/Content/ContentHeader";
 const Dashboard = () => {
   return (
     <>

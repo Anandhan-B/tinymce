@@ -73,7 +73,7 @@ export const Login = () => {
       });
       window.location.href = '/dashboard'
     } catch (error) {
-      if (error.response.status) {
+      if (error.response && error.response.status) {
         swal.fire({
           title: error.response.statusText,
           text: error.response.data,

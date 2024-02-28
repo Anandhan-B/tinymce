@@ -1,6 +1,6 @@
 import React from 'react'
 import './app.css'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Routes, Route} from "react-router-dom";
 import Tinymce from './Components/Tinymce/Tinymce';
 import Chatgpt from './Components/Chatgpt/Chatgpt';
 import Translate from './Components/Translate/Translate';
@@ -59,7 +59,20 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <RouterProvider router={router}/>
+    <>
+    {/* <RouterProvider router={router}/> */}
+    <Routes>
+      <Route path='/' Component={Login}/>
+      <Route path='/chat' Component={Chatgpt}/>
+      <Route path='/translate' Component={Translate}/>
+      <Route path='/signup' Component={Signup}/>
+      <Route path='/dashboard' Component={Dashboard}/>
+      <Route path='/admin' Component={AdminDashboard}/>
+      <Route path='/forgot-password' Component={ForgetPassword}/>
+      <Route path='/otp' Component={Otp}/>
+      <Route path='/reset' Component={Reset}/>
+    </Routes>
+    </>
   )
 }
 

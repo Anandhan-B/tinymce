@@ -54,6 +54,18 @@ const Translate = () => {
     }, 3000);
   }
 
+  const speak = async()=>{
+    if(!output) return swal.fire({title:"No data to speak",icon:"info"})
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(output);
+      if(to === 'english') utterance.lang = 'en-US'
+    
+      if(to === 'tamil') utterance.lang = 'ta-IN'
+  
+      if(to === 'hindi') utterance.lang = 'hi-IN'
+      synth.speak(utterance);
+  }
+
   return ( 
     <>
       <form className="container" onSubmit={submitForm}>
@@ -81,6 +93,7 @@ const Translate = () => {
           </div>
           <Textarea className="box" value={output} minRows={10} maxRows={10} placeholder="Your output here..." />
           <Button className="copy" variant='contained' onClick={copyData}>{copy}</Button>
+          <Button className="copy" variant='contained' onClick={speak}>Speak</Button>
         </div>
       </form>
     </>

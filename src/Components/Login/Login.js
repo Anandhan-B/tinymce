@@ -138,7 +138,7 @@ export const Login = () => {
             <label id="rem-log"> Remember me</label>
           </FormGroup>
           <Link href="#" id="fgt" to="/forgot-password">
-            Forget Password?
+            Forgot Password?
           </Link>
         </div>
         <Button id="btn" type="submit" variant="contained">
@@ -150,7 +150,7 @@ export const Login = () => {
             &nbsp; Signup
           </Link>
         </div>
-      </form>
+      </form>p
     </>
   );
 };

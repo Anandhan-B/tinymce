@@ -45,7 +45,9 @@ const Translate = () => {
     setFrom(to)
     setTo(temp)
   }
-  const copyData = ()=>{
+  const copyData = async()=>{
+    if(!output) return swal.fire({title:"No data to copy",icon:"info"})
+    await navigator.clipboard.writeText(output)
     setCopy("Copied");
     setTimeout(() => {
       setCopy("Copy");

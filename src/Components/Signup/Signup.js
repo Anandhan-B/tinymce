@@ -8,6 +8,7 @@ import {  useState } from "react";
 import axios from "axios";
 import swal from 'sweetalert2';
 import { styled } from '@mui/system';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -137,6 +138,10 @@ const Signup = () => {
             ),
           }}
         />
+        <HCaptcha
+      sitekey="0d796079-84ba-44a0-8b50-7fd090f48d7c"
+      // onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)}
+    />
         <Button id="btn-signin" type="submit" variant="contained">
           Signup
         </Button>

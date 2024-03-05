@@ -150,7 +150,7 @@ export const Login = () => {
             &nbsp; Signup
           </Link>
         </div>
-      </form>p
+      </form>
     </>
   );
 };

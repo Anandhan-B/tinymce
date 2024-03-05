@@ -147,7 +147,7 @@ const Signup = () => {
         </Button>
         <div id="aup-log">
           <label id="al-sign">Already have an account?</label>
-          <Link id="sign-log" to="/login">
+          <Link id="sign-log" to="/">
             &nbsp; Login
           </Link>
         </div>

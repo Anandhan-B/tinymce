@@ -15,6 +15,7 @@ const Translate = () => {
 
   const submitForm = async(e)=>{
     e.preventDefault();
+    if(from === to) return setOutput(text)
     axios.post('http://localhost:7000/api/v1/user/translate',{ from, to, text } )
     .then((response)=>{
         if(!(response.status === 200)){

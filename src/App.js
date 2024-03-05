@@ -11,8 +11,9 @@ import AdminDashboard from './Components/AdminDashboard/ADashboard';
 import ForgetPassword from './Components/Forget-Password/ForgetPassword';
 import Otp from './Components/Forget-Password/Otp';
 import Reset from './Components/Forget-Password/Reset';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
-const router = createBrowserRouter([
+/* const router = createBrowserRouter([
   {
     path:"/",
     element: <Tinymce/>
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
   },
 
 ]);
-
+ */
 
 const App = () => {
   return (
@@ -63,14 +64,16 @@ const App = () => {
     {/* <RouterProvider router={router}/> */}
     <Routes>
       <Route path='/' Component={Login}/>
-      <Route path='/chat' Component={Chatgpt}/>
-      <Route path='/translate' Component={Translate}/>
       <Route path='/signup' Component={Signup}/>
-      <Route path='/dashboard' Component={Dashboard}/>
-      <Route path='/admin' Component={AdminDashboard}/>
-      <Route path='/forgot-password' Component={ForgetPassword}/>
-      <Route path='/otp' Component={Otp}/>
-      <Route path='/reset' Component={Reset}/>
+      <Route Component={ProtectedRoute}>
+        <Route path='/chat' Component={Chatgpt}/>
+        <Route path='/translate' Component={Translate}/>
+        <Route path='/dashboard' Component={Dashboard}/>
+        <Route path='/admin' Component={AdminDashboard}/>
+        <Route path='/forgot-password' Component={ForgetPassword}/>
+        <Route path='/otp' Component={Otp}/>
+        <Route path='/reset' Component={Reset}/>
+      </Route>
     </Routes>
     </>
   )

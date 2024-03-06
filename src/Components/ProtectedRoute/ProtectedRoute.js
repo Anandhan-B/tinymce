@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Outlet, Navigate } from "react-router-dom";
-import swal from "sweetalert2"
 
 const ProtectedRoute = () => {
     const [auth,setAuth] = useState(false)
     const [loading,setLoading] = useState(true)
   useEffect(() => {
-    console.log("in effect");
     const validate = async () => {
       // let propMessage = null
       const token = localStorage.getItem("bulkmailusertoken");

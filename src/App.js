@@ -12,6 +12,7 @@ import ForgetPassword from './Components/Forget-Password/ForgetPassword';
 import Otp from './Components/Forget-Password/Otp';
 import Reset from './Components/Forget-Password/Reset';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import AuthCheck from './Components/AuthCheck/AuthCheck';
 
 /* const router = createBrowserRouter([
   {
@@ -63,8 +64,11 @@ const App = () => {
     <>
     {/* <RouterProvider router={router}/> */}
     <Routes>
-      <Route path='/' Component={Login}/>
-      <Route path='/signup' Component={Signup}/>
+      <Route Component={AuthCheck}>
+        <Route path='/' Component={Login}/>
+        <Route path='/signup' Component={Signup}/>
+      </Route>
+      
       <Route Component={ProtectedRoute}>
         <Route path='/chat' Component={Chatgpt}/>
         <Route path='/translate' Component={Translate}/>

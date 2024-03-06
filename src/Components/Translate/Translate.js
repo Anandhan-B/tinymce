@@ -58,7 +58,10 @@ const Translate = () => {
   const speak = async()=>{
     if(!output) return swal.fire({title:"No data to speak",icon:"info"})
       const synth = window.speechSynthesis;
+      const voices = synth.getVoices()
+      console.log("voices  ",voices);
       const utterance = new SpeechSynthesisUtterance(output);
+      utterance.voice = voices[2]
       if(to === 'english') utterance.lang = 'en-US'
     
       if(to === 'tamil') utterance.lang = 'ta-IN'

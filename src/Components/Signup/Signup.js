@@ -22,6 +22,7 @@ const Signup = () => {
   
   const [email,setEmail]=useState(null);
   const [password,setPassword]=useState(null);
+  const [isDisabled,setIsDisabled]=useState(true);
   const [confirmPassword,setConfirmPassword]=useState(null);
 
   const validateEmail = (email) => {
@@ -86,7 +87,9 @@ const Signup = () => {
     }
   }
 
-
+const handleVerificationSuccess = (token)=>{
+  setIsDisabled(false)
+}
 
   return (
     <>
@@ -140,9 +143,9 @@ const Signup = () => {
         />
         <HCaptcha
       sitekey="0d796079-84ba-44a0-8b50-7fd090f48d7c"
-      // onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)}
+       onVerify={handleVerificationSuccess}
     />
-        <Button id="btn-signin" type="submit" variant="contained">
+        <Button id="btn-signin" type="submit" disabled={isDisabled} variant="contained">
           Signup
         </Button>
         <div id="aup-log">

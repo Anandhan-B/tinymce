@@ -1,5 +1,6 @@
 import React from 'react'
 import './Sidebar.css'
+import { NavLink } from 'react-router-dom'
 import {BiExport, BiMailSend} from 'react-icons/bi'
 import {FaHistory, FaTasks} from 'react-icons/fa'
 import {RiAdvertisementLine} from 'react-icons/ri'
@@ -20,56 +21,58 @@ const Sidebar = () => {
 
 {/* Sidebar--Start */}
 
-      <div className='menu--list'>
-        <a href='#' className='item'>
+      <div className='menu--list'> 
+        <NavLink to='task-group' className='item'>
           <FaTasks className='icon'/>
           Task-Group
-        </a>
+        </NavLink>
       
 
       
-        <a href='#' className='item'>
+        <NavLink to='' className='item' end>
           <BiMailSend className='icon'/>
           Mail-Sender
-        </a>
+        </NavLink>
 
-        <a href='#' className='item'>
+        <NavLink to='translate' className='item'>
           <MdOutlineTranslate className='icon'/>
           Translate
-        </a>
+        </NavLink>
 
-        <a href='#' className='item'>
+        <NavLink to='advertisement' className='item'>
           <RiAdvertisementLine className='icon' />
           Advertisement
-        </a>
+        </NavLink>
     
 
       
-        <a href='#' className='item'>
+        <NavLink to='ai-creator' className='item'>
           <MdOutlineCreate className='icon'/>
           AI-Creater
-        </a>
+        </NavLink>
      
 
      
-        <a href='#' className='item'>
+        <NavLink to='history' className='item'>
           <FaHistory className='icon'/>
           History
-        </a>
+        </NavLink>
      
 
       
-        <a href='#' className='item'>
+        <NavLink to='export' className='item'>
           <BiExport className='icon'/>
           Export
-        </a>
+        </NavLink>
     
 
       
-        <a href='#' className='item'>
+        <NavLink to='/' onClick={()=>{
+              localStorage.removeItem("bulkmailusertoken")
+        }} className='item'>
           <MdOutlineLogout className='icon'/>
           Logout
-        </a>
+        </NavLink>
       
       </div>
     </div>

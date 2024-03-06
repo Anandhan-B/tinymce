@@ -16,12 +16,12 @@
     font-size: 1.8rem;
   }
   
-  .menu--list{
+  .admin-menu-list{
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  .menu--list .item{
+  .admin-menu-list .admin-menu-item{
     display: flex;
     align-items: center;
     font-size: 1.2rem;
@@ -34,7 +34,7 @@
     color: #27374d;
   }
   
-  .menu--list .item:hover{
+  .admin-menu-list .admin-menu-item{
     background: #27374d;
     color: #dde6ed;
   }

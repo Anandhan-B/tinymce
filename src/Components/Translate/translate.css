@@ -3,12 +3,11 @@
     font-family: "Noto Sans Tamil", sans-serif;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 100px;
+    gap: 50px;
     padding: 40px;
 }
 .box{
-  width: 400px;
+  width: 350px;
 }
 .select{
     width: 100px;

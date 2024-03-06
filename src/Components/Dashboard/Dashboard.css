@@ -1,15 +1,15 @@
 .dashboard{
     display: flex;
     gap: 20px;
+    overflow: hidden;
 }
 .dashboard--content{
     background-color: #fff;
     flex: 1;
-    border-radius: 20px;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
-    margin-left: 20%;
+    margin-left: 17%;
     gap: 1.5rem;
     justify-content: space-between;
+    overflow:auto;
 }

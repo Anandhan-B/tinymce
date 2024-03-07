@@ -18,8 +18,8 @@ const ASidebar = () => {
 
 {/* Sidebar--Start */}
 
-      <div className='menu--list'>
-        <a href='#' className='item'>
+      <div className='admin-menu-list'>
+        <a href='#' className='admin-menu-item'>
           <RiShieldUserLine className='icon'/>
           User-Management
         </a>

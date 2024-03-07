@@ -56,7 +56,7 @@ function Reset() {
         timer: 3000,
       });
       
-      window.location.href = '/login';
+      window.location.href = '/';
     } catch (error) {
       if (error.response.status) {
         swal.fire({
@@ -78,6 +78,7 @@ function Reset() {
           id='new-pass'
           label='New-Password'
           variant='outlined'
+          type='password'
           onChange={(e) => setPassword(e.target.value)} />
 
         <MyTextField

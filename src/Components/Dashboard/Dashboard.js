@@ -5,6 +5,7 @@ import Content from "./Content/Content";
 import Profile from "./Content/Profile";
 import Tinymce from "../Tinymce/Tinymce";
 import ContentHeader from "../Dashboard/Content/ContentHeader";
+import { Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <>
@@ -12,7 +13,7 @@ const Dashboard = () => {
         <Sidebar />
 
         <div className="dashboard--content">
-          <Tinymce />
+          <Outlet/>
         </div>
       </div>
     </>

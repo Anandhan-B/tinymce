@@ -18,6 +18,7 @@ import Otp from "./Components/Forget-Password/Otp";
 import Reset from "./Components/Forget-Password/Reset";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import AuthCheck from "./Components/AuthCheck/AuthCheck";
+import TaskGroup from "./Components/TaskGroup/TaskGroup";
 
 const App = () => {
   return (
@@ -35,6 +36,8 @@ const App = () => {
             <Route path="chat" Component={Chatgpt} />
             <Route path="translate" Component={Translate} />
             <Route path="" Component={Tinymce} />
+            <Route path="task-group" Component={TaskGroup} />
+
           </Route>
           <Route path="/admin" Component={AdminDashboard} />
         </Route>

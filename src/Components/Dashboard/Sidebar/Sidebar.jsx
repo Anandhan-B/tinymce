@@ -11,7 +11,6 @@ import {MdOutlineCreate, MdOutlineTranslate, MdOutlineDashboard, MdOutlineLogout
 const Sidebar = () => {
   return (
     <div className='body'>
-
       <div className='menu '>
         <div className='logo active'>
             <MdOutlineDashboard className='logo-icon' />
@@ -26,8 +25,6 @@ const Sidebar = () => {
           <FaTasks className='icon'/>
           Task-Group
         </NavLink>
-      
-
       
         <NavLink to='' className='item' end>
           <BiMailSend className='icon'/>

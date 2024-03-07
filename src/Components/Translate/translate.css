@@ -25,3 +25,12 @@
   flex-direction: column;
   gap: 10px;
 }
+.btn-tra{
+  color: #dde6ed;
+  background-color: #27374d;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  font-size: 18px;
+}

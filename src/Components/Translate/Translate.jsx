@@ -85,7 +85,7 @@ const Translate = () => {
         </div>
         <div className="middle">
         <IoMdSwap onClick={swap} className="icon" />
-        <Button variant='contained' type="submit">Translate</Button>
+        <button className="btn-tra" variant='contained' type="submit">Translate</button>
         </div>
         <div className="section right">
           <div className="dropdown">

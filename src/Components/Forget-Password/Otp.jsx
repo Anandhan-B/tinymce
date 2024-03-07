@@ -98,7 +98,7 @@ const Otp = () => {
         timer: 3000,
       });
       
-      
+      localStorage.removeItem("resetEmail")
       window.location.href = '/reset';
     } catch (error) {
       if (error.response.status) {

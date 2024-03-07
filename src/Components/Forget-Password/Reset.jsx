@@ -55,7 +55,7 @@ function Reset() {
         icon: "success",
         timer: 3000,
       });
-      
+      localStorage.removeItem("resetToken")
       window.location.href = '/';
     } catch (error) {
       if (error.response.status) {

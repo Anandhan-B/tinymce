@@ -19,6 +19,10 @@ import Reset from "./Components/Forget-Password/Reset";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import AuthCheck from "./Components/AuthCheck/AuthCheck";
 import TaskGroup from "./Components/TaskGroup/TaskGroup";
+import Advertisement from "./Components/Advertisement/Advertisement";
+import AICreator from "./Components/AICreator/AICreator";
+import MailHistory from "./Components/MailHistory/MailHistory";
+import ExportData from "./Components/ExportData/ExportData";
 
 const App = () => {
   return (
@@ -33,11 +37,14 @@ const App = () => {
         </Route>
         <Route Component={ProtectedRoute}>
           <Route path="/dashboard" Component={Dashboard}>
-            <Route path="chat" Component={Chatgpt} />
-            <Route path="translate" Component={Translate} />
-            <Route path="" Component={Tinymce} />
             <Route path="task-group" Component={TaskGroup} />
-
+            <Route path="" Component={Tinymce} />
+            <Route path="translate" Component={Translate} />
+            <Route path="advertisement" Component={Advertisement} />
+            <Route path="ai-creator" Component={AICreator} />
+            <Route path="history" Component={MailHistory} />
+            <Route path="export" Component={ExportData} />
+            <Route path="chat" Component={Chatgpt} />
           </Route>
           <Route path="/admin" Component={AdminDashboard} />
         </Route>

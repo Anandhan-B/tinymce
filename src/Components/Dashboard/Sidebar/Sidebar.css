@@ -4,7 +4,6 @@
   gap: 2.3rem;
   height: 94dvh;
   border-right: solid silver 1.5px;
-  padding: 1rem;
 }
 .logo{
   text-align: center;
@@ -22,17 +21,16 @@
 .menu--list{
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 .menu--list .item{
+  border: solid red 2px;
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  gap: 20px;
   text-decoration: none;
+  gap:20px;
   font-weight: 600;
   padding: 10px;
-  border-radius: 10px;
   transition: 0.1s ease-in-out;
   color: #27374d;
 }

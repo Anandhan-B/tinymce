@@ -22,43 +22,43 @@ const Sidebar = () => {
 
       <div className='menu--list'> 
         <NavLink to='task-group' className='item'>
-          <FaTasks className='icon'/>
+          <FaTasks className='sidebar-icon'/>
           Task-Group
         </NavLink>
       
         <NavLink to='' className='item' end>
-          <BiMailSend className='icon'/>
+          <BiMailSend className='sidebar-icon'/>
           Mail-Sender
         </NavLink>
 
         <NavLink to='translate' className='item'>
-          <MdOutlineTranslate className='icon'/>
+          <MdOutlineTranslate className='sidebar-icon'/>
           Translate
         </NavLink>
 
         <NavLink to='advertisement' className='item'>
-          <RiAdvertisementLine className='icon' />
+          <RiAdvertisementLine className='sidebar-icon' />
           Advertisement
         </NavLink>
     
 
       
         <NavLink to='ai-creator' className='item'>
-          <MdOutlineCreate className='icon'/>
+          <MdOutlineCreate className='sidebar-icon'/>
           AI-Creater
         </NavLink>
      
 
      
         <NavLink to='history' className='item'>
-          <FaHistory className='icon'/>
+          <FaHistory className='sidebar-icon'/>
           History
         </NavLink>
      
 
       
         <NavLink to='export' className='item'>
-          <BiExport className='icon'/>
+          <BiExport className='sidebar-icon'/>
           Export
         </NavLink>
     
@@ -67,7 +67,7 @@ const Sidebar = () => {
         <NavLink to='/' onClick={()=>{
               localStorage.removeItem("bulkmailusertoken")
         }} className='item'>
-          <MdOutlineLogout className='icon'/>
+          <MdOutlineLogout className='sidebar-icon'/>
           Logout
         </NavLink>
       

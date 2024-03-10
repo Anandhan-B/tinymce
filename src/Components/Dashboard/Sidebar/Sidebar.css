@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 2.3rem;
   height: 94dvh;
-  position: fixed;
   border-right: solid silver 1.5px;
   padding: 1rem;
 }

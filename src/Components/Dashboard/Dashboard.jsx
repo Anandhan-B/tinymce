@@ -9,7 +9,7 @@ const Dashboard = () => {
         <Sidebar />
 
         <div className="dashboard--content">
-          <nav className="nav">Nothing</nav>
+          {/* <nav className="nav">Nothing</nav> */}
           <Outlet/>
         </div>
       </div>

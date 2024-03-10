@@ -3,6 +3,7 @@ import axios from "axios";
 import { Outlet, Navigate } from "react-router-dom";
 
 const ProtectedRoute = () => {
+    const [userData,setData] = useState("Sample Data")
     const [auth,setAuth] = useState(false)
     const [loading,setLoading] = useState(true)
   useEffect(() => {
@@ -19,7 +20,9 @@ const ProtectedRoute = () => {
               },
             }
           );
-          localStorage.setItem("bulkmailuserdata", response.data);
+          // localStorage.setItem("bulkmailuserdata", response.data);
+          setData(response.data)
+          console.log("Main Data : ",response.data)
           setAuth(true);
           setLoading(false);
 
@@ -40,7 +43,7 @@ const ProtectedRoute = () => {
   }, []);
   if(loading) return (<div>Loading...</div>)
   return (
-    auth ? <Outlet /> : <Navigate to="/" />
+    auth ? <Outlet context={userData} /> : <Navigate to="/" />
     );
 };
 

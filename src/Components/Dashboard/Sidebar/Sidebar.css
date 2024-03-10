@@ -2,44 +2,48 @@
   display: flex;
   flex-direction: column;
   gap: 2.3rem;
-  height: 94dvh;
+  min-height: 100dvh;
   border-right: solid silver 1.5px;
 }
-.logo{
-  text-align: center;
-  padding: 20px;
+.sidebar-logo{
   color: #27374d;
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  padding: 0 10px;
 }
 .logo-icon{
-  font-size: 1.8rem;
+  font-size: 3rem !important;
 }
 
 
+.sidebar-logo h2 span{
+  font-size: 1.3rem;
+}
 .menu--list{
   display: flex;
   flex-direction: column;
 }
 .menu--list .item{
-  border: solid red 2px;
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-decoration: none;
-  gap:20px;
+  gap:15px;
   font-weight: 600;
   padding: 10px;
+  padding-left: 15px;
   transition: 0.1s ease-in-out;
   color: #27374d;
 }
 
 .menu--list .item:hover{
   background: rgba(39, 55, 77, 0.5);
+  transition: .4s;
 }
 
 .menu--list .item.active{
   background: #27374d;
   color: #dde6ed;
+  transition: .4s;
 }

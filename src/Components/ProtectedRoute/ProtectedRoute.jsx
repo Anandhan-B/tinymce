@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Outlet, Navigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const ProtectedRoute = () => {
     const [userData,setData] = useState("Sample Data")
@@ -37,11 +38,9 @@ const ProtectedRoute = () => {
         }
       
     };
-    validate()
-    
-
+      validate()    
   }, []);
-  if(loading) return (<div>Loading...</div>)
+  if(loading) return (<Loader/>)
   return (
     auth ? <Outlet context={userData} /> : <Navigate to="/" />
     );

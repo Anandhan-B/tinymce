@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import axios from 'axios'
+import Loader from '../Loader/Loader'
 
 const AuthCheck = () => {
     const [noAuth,setNoAuth] = useState(true)
@@ -28,7 +29,7 @@ const AuthCheck = () => {
         checkAuth();
     },[])
 
-    if(loading) return(<div>Loading...</div>)
+    if(loading) return(<Loader/>)
   return (
     noAuth ? <Outlet/> : <Navigate to="/dashboard" />
   )

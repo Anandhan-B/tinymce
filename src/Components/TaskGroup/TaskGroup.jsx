@@ -1,6 +1,7 @@
 import React from 'react'
 import './TaskGroup.css'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { FcFolder } from "react-icons/fc";
 
 const TaskGroup = () => {
   let data = [
@@ -19,7 +20,50 @@ const TaskGroup = () => {
     <>
       <div className='taskgroup-container'>
         <h1 className='taskgroup-title'>Task Groups</h1>
-        <TableContainer component={Paper}>
+
+        <div className="taskgroup-list">
+          <div className="taskgroup">
+            <div className="folder-icon">
+              <FcFolder size={30}/>
+            </div>
+            <div className="group-name">
+              Group 1
+            </div>
+          </div>
+          <div className="taskgroup">
+            <div className="folder-icon">
+              <FcFolder size={30}/>
+            </div>
+            <div className="group-name">
+              Group 2
+            </div>
+          </div>
+          <div className="taskgroup">
+            <div className="folder-icon">
+              <FcFolder size={30}/>
+            </div>
+            <div className="group-name">
+              Group 3
+            </div>
+          </div>
+          <div className="taskgroup">
+            <div className="folder-icon">
+              <FcFolder size={30}/>
+            </div>
+            <div className="group-name">
+              Group 4
+            </div>
+          </div>
+          <div className="taskgroup">
+            <div className="folder-icon">
+              <FcFolder size={30}/>
+            </div>
+            <div className="group-name">
+              Group 5
+            </div>
+          </div>
+        </div>
+        {/* <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -41,7 +85,7 @@ const TaskGroup = () => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer> */}
       </div>
 
     </>

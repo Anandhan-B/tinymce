@@ -4,4 +4,24 @@
 .taskgroup-title{
     text-align: center;
 }
-
+.taskgroup-list{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.taskgroup{
+    padding: .3rem;
+    display: flex;
+    gap:1rem;
+    cursor: pointer;
+    min-height: 2rem;
+    align-items: center;
+    border-bottom: solid 1px grey;
+}
+.folder-icon, .group-name{
+    font-size: 1.3rem !important;
+} 
+.taskgroup:hover{
+    background: #B9D9EB;
+    transition: .4s;
+}

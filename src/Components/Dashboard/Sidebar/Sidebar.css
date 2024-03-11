@@ -3,14 +3,15 @@
   flex-direction: column;
   gap: 2.3rem;
   min-height: 100dvh;
-  border-right: solid silver 1.5px;
+  border-right: solid silver 3px;
+  width:15rem;
 }
 .sidebar-logo{
   color: #27374d;
   align-items: center;
   display: flex;
   gap: 10px;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 .logo-icon{
   font-size: 3rem !important;
@@ -18,7 +19,7 @@
 
 
 .sidebar-logo h2 span{
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .menu--list{
   display: flex;
@@ -32,13 +33,17 @@
   gap:15px;
   font-weight: 600;
   padding: 10px;
-  padding-left: 15px;
+  padding-left: 11px;
+  height: 40px;
   transition: 0.1s ease-in-out;
+  border-left: solid transparent 4px;
   color: #27374d;
 }
 
 .menu--list .item:hover{
   background: rgba(39, 55, 77, 0.5);
+  border-left-color: #27374d;
+  padding-left: 16px; 
   transition: .4s;
 }
 

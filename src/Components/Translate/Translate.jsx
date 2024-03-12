@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./translate.css";
 import { Textarea } from "@mui/joy";
-import { Button } from "@mui/material";
+import { MdOutlineContentCopy } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
+import { HiMiniSpeakerWave } from "react-icons/hi2";
+import { HiMiniSpeakerXMark } from "react-icons/hi2";
 import axios from "axios";
 import swal from "sweetalert2";
 import { IoMdSwap } from "react-icons/io";
@@ -289,7 +292,7 @@ const Translate = () => {
   return (
     <>
       <form className="container" onSubmit={submitForm}>
-        <div className="section left">
+        <div className="section-left">
           <div className="dropdown">
             From:{" "}
             <select
@@ -320,7 +323,7 @@ const Translate = () => {
             Translate
           </button>
         </div>
-        <div className="section right">
+        <div className="section-right">
           <div className="dropdown">
             To:{" "}
             <select
@@ -341,12 +344,14 @@ const Translate = () => {
             maxRows={10}
             placeholder="Your output here..."
           />
-          <Button className="copy" variant="contained" onClick={copyData}>
-            {copy}
-          </Button>
-          <Button className="copy" variant="contained" onClick={speak}>
-            Speak
-          </Button>
+          <div className="c-s" >
+          <div className="copy" variant="contained" onClick={copyData}>
+            {<MdOutlineContentCopy onClick={<FaCheck />} />}
+          </div>
+          <div className="speak" variant="contained" onClick={speak}>
+          <HiMiniSpeakerXMark onClick={<HiMiniSpeakerWave />} />  
+          </div>
+          </div>
         </div>
       </form>
     </>

@@ -2,6 +2,7 @@ import React from 'react'
 import './TaskGroup.css'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import { FcFolder } from "react-icons/fc";
+import { MdOutlineCreateNewFolder } from "react-icons/md";
 
 const TaskGroup = () => {
   let data = [
@@ -20,6 +21,9 @@ const TaskGroup = () => {
     <>
       <div className='taskgroup-container'>
         <h1 className='taskgroup-title'>Task Groups</h1>
+        <div className="add-group">
+          < MdOutlineCreateNewFolder size={30} /> Add Task Group
+        </div>
 
         <div className="taskgroup-list">
           <div className="taskgroup">

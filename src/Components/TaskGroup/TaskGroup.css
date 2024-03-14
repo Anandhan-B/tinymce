@@ -9,6 +9,13 @@
     flex-direction: column;
     gap: 3px;
 }
+.add-group{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
 .taskgroup{
     padding: .3rem;
     display: flex;
@@ -16,7 +23,6 @@
     cursor: pointer;
     min-height: 2rem;
     align-items: center;
-    border-bottom: solid 1px grey;
 }
 .folder-icon, .group-name{
     font-size: 1.3rem !important;

@@ -55,14 +55,7 @@
   width: 120px;
   font-size: 18px;
 }
-.section-left{
-  position: relative;
-  top: 85px;
-}
-.section-right{
-  position: relative;
-  top: 100px;
-}
+
 .dropdown{
   border-radius: 5px;
 }

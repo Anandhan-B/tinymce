@@ -14,7 +14,7 @@ const Translate = () => {
   const [to, setTo] = useState("English");
   const [text, setText] = useState("");
   const [output, setOutput] = useState("");
-  const [copy, setCopy] = useState("Copy");
+  const [copyClick,setCopyClick] = useState(false);
   const translateLanguages = [
     "Afrikaans",
     "Albanian",
@@ -275,9 +275,9 @@ const Translate = () => {
   const copyData = async () => {
     if (!output) return swal.fire({ title: "No data to copy", icon: "info" });
     await navigator.clipboard.writeText(output);
-    setCopy("Copied");
+    setCopyClick(true);
     setTimeout(() => {
-      setCopy("Copy");
+      setCopyClick(false);
     }, 3000);
   };
 
@@ -286,7 +286,7 @@ const Translate = () => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(output);
     utterance.lang = languageTags[to];
-    synth.speak(utterance);
+     synth.speak(utterance);
   };
 
   return (
@@ -346,10 +346,10 @@ const Translate = () => {
           />
           <div className="c-s" >
           <div className="copy" variant="contained" onClick={copyData}>
-            {<MdOutlineContentCopy onClick={<FaCheck />} />}
+            {copyClick ? <FaCheck/> : <MdOutlineContentCopy/> }
           </div>
           <div className="speak" variant="contained" onClick={speak}>
-          <HiMiniSpeakerXMark onClick={<HiMiniSpeakerWave />} />  
+          <HiMiniSpeakerWave /> 
           </div>
           </div>
         </div>

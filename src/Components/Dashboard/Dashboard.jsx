@@ -11,7 +11,7 @@ const Dashboard = () => {
         <Sidebar data={userData} />
 
         <div className="dashboard--content">
-          <nav className="nav">Nothing</nav>
+          <nav className="nav"><h2><span>{userData.email.split("@")[0]}  </span><br/> </h2></nav>
           <Outlet/>
         </div>
       </div>

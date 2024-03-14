@@ -65,7 +65,9 @@ const Tinymce = () => {
       <div className="subject">
         <input className='sub' type="text" onChange={(e)=> setSubject(e.target.value)} placeholder='Enter the Subject' required />
     </div>
+    <div className="tinymce">
     <Editor
+          
           onInit={(evt, editor) => editorRef.current = editor}
           apiKey='qp0heog9dajv9y1me4lgf5l9layggufynvqbwsbyd26rbt8t'
           init={{
@@ -99,8 +101,8 @@ const Tinymce = () => {
             )),
           }}
           initialValue="Write Your Email here"
-         
         />
+        </div>
         
         <div className='box'>
         <TextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />

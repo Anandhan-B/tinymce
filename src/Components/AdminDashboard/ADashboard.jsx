@@ -4,7 +4,7 @@ import ASidebar from './ASidebar/ASidebar';
  const ADashboard = () => {
   return (
 <>
-   <div className='dashboard'>
+   <div className='admin-dashboard'>
       <ASidebar />
     </div>
 </>

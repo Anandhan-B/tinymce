@@ -1,6 +1,6 @@
 .dashboard{
     display: flex;
-    gap: 20px;
+    gap: 200px;
     overflow: hidden;
     background: #e7eaf6;
 }
@@ -16,5 +16,5 @@
 .nav{
     height:120px;
     border-bottom: solid silver 2px;
-
+    border: 1px solid red;
 }

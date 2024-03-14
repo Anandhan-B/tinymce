@@ -15,7 +15,7 @@ const Sidebar = (props) => {
       <div className='menu '>
         <div className='sidebar-logo active'>
             <MdOutlineDashboard className='logo-icon' />
-            <h2><span>{props.data.email.split("@")[0] +"'s "}</span><br/> Dashboard</h2>
+            <h2>{/* <span>{props.data.email.split("@")[0] +"'s "}</span><br/> */} Dashboard</h2>
         </div>
       
 

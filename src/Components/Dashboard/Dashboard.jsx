@@ -11,7 +11,7 @@ const Dashboard = () => {
         <Sidebar data={userData} />
 
         <div className="dashboard--content">
-          {/* <nav className="nav">Nothing</nav> */}
+          <nav className="nav">Nothing</nav>
           <Outlet/>
         </div>
       </div>

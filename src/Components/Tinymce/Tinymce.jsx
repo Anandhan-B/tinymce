@@ -5,6 +5,15 @@ import { TextField, Button } from '@mui/material';
 import swal from 'sweetalert2';
 import axios from 'axios';
 import './tinymce.css'
+import { styled } from '@mui/system';
+
+const MyTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiInputBase-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: '#27374d', // Focused border color
+    },
+  },
+}));
 
 const Tinymce = () => {
     const editorRef = useRef(null);
@@ -105,8 +114,8 @@ const Tinymce = () => {
         </div>
         
         <div className='box'>
-        <TextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
-        <Button variant="contained" type='submit'>Send</Button> 
+        <MyTextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
+        <button className='box-btn' variant="contained" type='submit'>Send</button> 
         </div>
         </form>
         </>

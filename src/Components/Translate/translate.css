@@ -12,12 +12,7 @@
 .select{
     width: 100px;
     height: 30px;
-    border-radius: 5px;
-    
-}
-
-#fromlang{
-  border-radius: 5px;
+    border-radius: 5px;  
 }
 .c-s{
   display: flex;
@@ -44,7 +39,7 @@
   flex-direction: column;
   gap: 10px;
   position: relative;
-  top: 70px;
+  
 }
 .btn-tra{
   color: #dde6ed;
@@ -58,4 +53,14 @@
 
 .dropdown{
   border-radius: 5px;
+}
+.section-left{
+  
+  position: relative;
+  top: 5px;
+}
+.section-right{
+  position: relative;
+  top: 19px;
+  right: 71px;
 }

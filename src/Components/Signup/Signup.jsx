@@ -9,6 +9,7 @@ import axios from "axios";
 import swal from 'sweetalert2';
 import { styled } from '@mui/system';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import WhiteLoader from '../WhiteLoader/WhiteLoader'
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -24,6 +25,7 @@ const Signup = () => {
   const [password,setPassword]=useState(null);
   const [isDisabled,setIsDisabled]=useState(true);
   const [confirmPassword,setConfirmPassword]=useState(null);
+  const [loading,setLoading]=useState(false);
 
   const validateEmail = (email) => {
     return String(email).toLowerCase().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -48,6 +50,7 @@ const Signup = () => {
         icon: "error",
       });
       try {
+        setLoading(true)
         const response = await axios.post(
           "http://localhost:7000/api/v1/user/signup",
           {
@@ -66,6 +69,7 @@ const Signup = () => {
         window.location.href = '/dashboard'
 
       } catch (error) {
+        setLoading(false)
         if (error.response.status) {
           swal.fire({
             title: error.response.statusText,
@@ -146,7 +150,7 @@ const handleVerificationSuccess = (token)=>{
        onVerify={handleVerificationSuccess}
     />
         <Button id="btn-signin" type="submit" disabled={isDisabled} variant="contained">
-          Signup
+          {loading ? <WhiteLoader/> : "Signup"}
         </Button>
         <div id="aup-log">
           <label id="al-sign">Already have an account?</label>

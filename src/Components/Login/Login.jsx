@@ -15,7 +15,7 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert2";
 import { styled } from '@mui/system';
-
+import WhiteLoader from "../WhiteLoader/WhiteLoader";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -35,6 +35,7 @@ const MyTextField = styled(TextField)(({ theme }) => ({
 export const Login = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -57,6 +58,7 @@ export const Login = () => {
         icon: "error",
       });
     try {
+      setLoading(true)
       const response = await axios.post(
         "http://localhost:7000/api/v1/user/login",
         {
@@ -73,6 +75,7 @@ export const Login = () => {
       });
       window.location.href = '/dashboard'
     } catch (error) {
+      setLoading(false)
       if (error.response && error.response.status) {
         swal.fire({
           title: error.response.statusText,
@@ -142,7 +145,7 @@ export const Login = () => {
           </Link>
         </div>
         <Button id="btn" type="submit" variant="contained">
-          Login
+          {loading ? <WhiteLoader/>: "Login"}
         </Button>
         <div id="aup-log">
           <label id="dont-log">Don't have an account?</label>
@@ -150,6 +153,7 @@ export const Login = () => {
             &nbsp; Signup
           </Link>
         </div>
+       
       </form>
     </>
   );

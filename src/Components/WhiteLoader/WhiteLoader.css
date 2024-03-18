@@ -1,0 +1,18 @@
+
+.white-loader{
+    text-align: center;
+    background: transparent;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #Layer_1
+  {
+    enable-background: new 0 0 50 50;
+  }
+  /*
+    Set the color of the icon
+  */
+  .load-rect-white{
+    fill: #e7eaf6;
+  }
+ 

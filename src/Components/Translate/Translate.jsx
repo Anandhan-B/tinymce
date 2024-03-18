@@ -351,19 +351,24 @@ const Translate = () => {
         </div>
         <div className="section-right">
           <div className="dropdown">
-            To:{" "}
-            <select
-              value={to}
-              name="language"
-              onChange={(e) => setTo(e.target.value)}
-              className="select"
-              required
-              id="tolang"
-            >
-              {translateLanguages.map((language) => (
-                <option value={language}>{language}</option>
-              ))}
-            </select>
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                To
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={to}
+                onChange={(e) => setFrom(e.target.value)}
+                autoWidth
+                required
+                label="To"
+              >
+                {translateLanguages.map((language) => (
+                  <MenuItem value={language}>{language}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
           <div className="translate-area">
           <Textarea
@@ -374,15 +379,16 @@ const Translate = () => {
             placeholder="Your output here..."
           />
           </div>
-         {/*  <div className="c-s">
+          </div>
+          <div className="c-s">
             <div className="copy" variant="contained" onClick={copyData}>
               {copyClick ? <FaCheck /> : <MdOutlineContentCopy />}
             </div>
             <div className="speak" variant="contained" onClick={speak}>
               <HiMiniSpeakerWave />
             </div>
-          </div> */}
-        </div>
+          </div>
+       
       </form>
     </>
   );

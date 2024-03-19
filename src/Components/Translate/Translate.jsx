@@ -307,7 +307,7 @@ const Translate = () => {
   return (
     <>
       <form className="container" onSubmit={submitForm}>
-        <div className="section-left">
+        <div className="dropdown-row">
           <div className="dropdown">
             <FormControl sx={{ m: 1, minWidth: 80 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
@@ -328,7 +328,31 @@ const Translate = () => {
               </Select>
             </FormControl>
           </div>
-          <div className="translate-area">
+          <div className="swap">
+            <IoMdSwap onClick={swap} className="swap-icon" />
+          </div>
+          <div className="dropdown">
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                To
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+                autoWidth
+                required
+                label="To"
+              >
+                {translateLanguages.map((language) => (
+                  <MenuItem value={language}>{language}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="translate-from">
           <Textarea
             required
             onChange={(e) => setText(e.target.value)}
@@ -341,36 +365,14 @@ const Translate = () => {
                 borderColor: "Red", // Change this to your desired color
               },
             }}
-          /></div>
+          />
         </div>
-        <div className="middle">
-          <IoMdSwap onClick={swap} className="icon" />
+        <div className="translate-btn">
           <button className="btn-tra" variant="contained" type="submit">
             {loading ? <WhiteLoader /> : "Translate"}
           </button>
         </div>
-        <div className="section-right">
-          <div className="dropdown">
-          <FormControl sx={{ m: 1, minWidth: 80 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                To
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={to}
-                onChange={(e) => setFrom(e.target.value)}
-                autoWidth
-                required
-                label="To"
-              >
-                {translateLanguages.map((language) => (
-                  <MenuItem value={language}>{language}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div className="translate-area">
+        <div className="translate-result">
           <Textarea
             className="box"
             value={output}
@@ -378,17 +380,16 @@ const Translate = () => {
             maxRows={10}
             placeholder="Your output here..."
           />
-          </div>
-          </div>
-          <div className="c-s">
+        </div>
+
+        {/* <div className="c-s">
             <div className="copy" variant="contained" onClick={copyData}>
               {copyClick ? <FaCheck /> : <MdOutlineContentCopy />}
             </div>
             <div className="speak" variant="contained" onClick={speak}>
               <HiMiniSpeakerWave />
             </div>
-          </div>
-       
+          </div> */}
       </form>
     </>
   );

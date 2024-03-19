@@ -113,7 +113,7 @@ const Tinymce = () => {
         />
         </div>
         
-        <div className='box'>
+        <div className='sendto'>
         <MyTextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
         <button className='box-btn' variant="contained" type='submit'>Send</button> 
         </div>

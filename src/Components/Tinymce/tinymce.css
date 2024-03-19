@@ -1,9 +1,13 @@
-.box{
+.sendto{
     display: flex;
-    gap: 20px;
+    margin: 20px 0;
     position: relative;
-    left: 35px;
-    margin: 0%;
+    left: 55px;
+    width: 430px;
+    gap: 20px;
+}
+#outlined-basic{
+    width: 300px;
 }
 .box-btn{
     color: #dde6ed;
@@ -14,6 +18,10 @@
     width: 80px;
     font-size: 15px;
     font-weight: 550;
+    margin: auto;
+}
+.box-btn:hover{
+    cursor: pointer;
 }
 .subject{
     margin: 10px 20px 10px 57px;

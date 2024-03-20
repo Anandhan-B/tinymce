@@ -27,30 +27,28 @@ select:-webkit-autofill:focus {
   /* transition: background-color 5000s ease-in-out 0s;  */
 }
 
-body {
+html, body {
   --sb-track-color: #dde6ed;
   --sb-thumb-color: #27374d;
   --sb-size: 4px;
 }
 
-body::-webkit-scrollbar {
-  width: var(--sb-size)
+::-webkit-scrollbar {
+  width: var(--sb-size);
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 6px;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 6px;
-  
 }
 
-@supports not selector(::-webkit-scrollbar) {
-  body {
-    scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+@supports not (selector(::-webkit-scrollbar)) {
+  html, body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }

@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 import axios from 'axios';
 import './tinymce.css'
 import { styled } from '@mui/system';
+import WhiteLoader from '../WhiteLoader/WhiteLoader';
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -19,42 +20,52 @@ const Tinymce = () => {
     const editorRef = useRef(null);
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
+    const [loading, setLoading] = useState(false);
     
     const validateEmail = (email) => {
       return String(email)
           .toLowerCase()
           .match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   };
-  const sendMail = (e) => {
+  const sendMail = async(e) => {
     e.preventDefault();
+    const token = localStorage.getItem("bulkmailusertoken");
+    if (!token)
+      return swal.fire("Error", "Session Expired, try again later", "error");
     if (editorRef.current) {
      
       if(email && validateEmail(email)){
       const content = editorRef.current.getContent();
       //console.log(content);
-      fetch('http://localhost:7000/api/v1/user/mail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, subject, content }),
-      })
-        .then(response => {
-          return response.text()
-        }).then((message)=>{
-          swal.fire({
-            title: "Success",
-            text: message,
-            icon: "success",
-          });
-        })
-        .catch(error => {
-          swal.fire({
-            title: "Error",
-            text: error,
-            icon: "error",
-          });       
+      try {
+        setLoading(true)
+        const response = await axios.post(
+          'http://localhost:7000/api/v1/user/mail',{ email, subject, content },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setLoading(false);
+        swal.fire({
+        title: "Success",
+        text: response.data,
+        icon: "success",
+        timer: 1000,
         });
+      } catch (error) {
+        setLoading(false)
+        if (error.response.status) {
+          swal.fire({
+            title: error.response.statusText,
+            text: error.response.data,
+            icon: "error",
+          });
+        } else {
+          swal.fire({ title: "Error", text: error.message, icon: "error" });
+        }
+      }
       }
       else{
         swal.fire({
@@ -88,26 +99,32 @@ const Tinymce = () => {
               { value: 'First.Name', title: 'First Name' },
               { value: 'Email', title: 'Email' },
             ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.resolve(
-                axios.post('http://localhost:7000/api/v1/user/chat',{ "prompt": request } )
-                .then((response)=>{
-                    if(!(response.status === 200)){
-                      swal.fire({
-                        title:"Error",
-                        text:response.data,
-                        icon:"error"
-                      })
-                      return
-                    }
+            ai_request: (request, respondWith) => respondWith.string(async() => {
+              const token = localStorage.getItem("bulkmailusertoken");
+              if (!token)
+                return swal.fire("Error", "Session Expired, try again later", "error");
+                  try {
+                    const response = await axios.post(
+                      'http://localhost:7000/api/v1/user/chat',{ "prompt": request },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
+                    );
                     return response.data
-                }).catch((err)=>{
-                  swal.fire({
-                    title:"Error",
-                    text: err.message,
-                    icon:"error"
-                  })
-                })
-            )),
+                  } catch (error) {
+                    if (error.response.status) {
+                      swal.fire({
+                        title: error.response.statusText,
+                        text: error.response.data,
+                        icon: "error",
+                      });
+                    } else {
+                      swal.fire({ title: "Error", text: error.message, icon: "error" });
+                    }
+                  }
+                })  
           }}
           initialValue="Write Your Email here"
         />
@@ -115,7 +132,7 @@ const Tinymce = () => {
         
         <div className='sendto'>
         <MyTextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
-        <button className='box-btn' variant="contained" type='submit'>Send</button> 
+        <button className='box-btn' variant="contained" type='submit'>{loading ? <WhiteLoader/> : "Send"}</button> 
         </div>
         </form>
         </>

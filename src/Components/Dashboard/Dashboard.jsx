@@ -12,7 +12,7 @@ const Dashboard = () => {
 
         <div className="dashboard--content">
           <nav className="nav"><h2><span>{userData.email.split("@")[0]}  </span><br/> </h2></nav>
-          <Outlet/>
+          <div className="dashboard-outlet"><Outlet/></div>
         </div>
       </div>
     </>

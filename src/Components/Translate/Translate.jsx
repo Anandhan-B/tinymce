@@ -372,6 +372,14 @@ const Translate = () => {
             {loading ? <WhiteLoader /> : "Translate"}
           </button>
         </div>
+        <div className="translate-actions">
+        <div className="copy" variant="contained" onClick={copyData}>
+              {copyClick ? <FaCheck /> : <MdOutlineContentCopy />}
+            </div>
+            <div className="speak" variant="contained" onClick={speak}>
+              <HiMiniSpeakerWave />
+            </div>
+        </div>
         <div className="translate-result">
           <Textarea
             className="box"

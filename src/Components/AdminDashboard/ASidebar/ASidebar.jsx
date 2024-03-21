@@ -12,7 +12,7 @@ const ASidebar = () => {
       <div className='menu'>
         <div className='logo'>
             <MdOutlineAdminPanelSettings className='logo-icon' />
-            <h2>Admin-Dashboard</h2>
+            <h2>Admin Dashboard</h2>
         </div>
       
 

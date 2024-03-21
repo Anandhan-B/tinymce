@@ -6,11 +6,11 @@
   }
   .logo{
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     color: #27374d;
     align-items: center;
     display: flex;
-    gap: 20px;
+    gap: 5px;
   }
   .logo-icon{
     font-size: 1.8rem;
@@ -32,6 +32,7 @@
     border-radius: 10px;
     transition: 0.1s ease-in-out;
     color: #27374d;
+    margin: 0 10px;
   }
   
   .admin-menu-list .admin-menu-item{

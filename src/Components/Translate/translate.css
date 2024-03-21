@@ -29,51 +29,16 @@
 .swap-icon{
   font-size: 1.5rem !important;
 }
-/*
-
-
-.c-s{
+.translate-actions{
   display: flex;
-  color: #27374d;
-  position: relative;
-  right: 155px;
-  bottom: 185px;
   justify-content: flex-end;
- 
+  gap: 1.5rem;
+  width: 90%;
 }
-.c-s:hover{
+.translate-actions div{
   cursor: pointer;
+  font-size: 1.5rem;
 }
- .copy{
-  margin-left: 20px !important;
-  font-size: 20px;
-} 
-.speak{
-  margin-left: 20px !important;
-  font-size: 22px;
+.translate-actions div:hover{
+  color: #27374d;
 }
-
-.btn-tra:hover{
-  cursor: pointer;
-}
-
-.dropdown{
-  border-radius: 5px;
-}
-.section-left{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-  position: relative;
-  bottom: 20px;
-}
-.section-right{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-  position: relative;
-  bottom: 20px;
-}
- */

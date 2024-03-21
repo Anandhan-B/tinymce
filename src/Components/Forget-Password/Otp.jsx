@@ -84,11 +84,17 @@ const Otp = () => {
   }, [resendTime]);
 
   const handleOtp  = async()=>{
+    const email = localStorage.getItem("resetEmail")
+    if(!email) return swal.fire({
+      title: "Error",
+      text: "Try again later",
+      icon: "error",
+    });
     if (!otp) return swal.fire('Error!', 'Fill the OTP field', 'error');
 
     try {
       const response = await axios.post(
-        `http://localhost:7000/api/v1/user/reset-password/${otp}`
+        `http://localhost:7000/api/v1/user/reset-password/${otp}`,{email}
       );
       localStorage.setItem("resetToken",response.data.resetToken)
       swal.fire({

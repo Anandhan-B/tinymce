@@ -1,1 +1,3 @@
 https://codepen.io/AdamMorsi/pen/mdqqpyX
+https://primereact.org/datatable/
+https://www.npmjs.com/package/primereact

@@ -19,23 +19,22 @@
   .admin-menu-list{
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
   .admin-menu-list .admin-menu-item{
     display: flex;
     align-items: center;
     font-size: 1.2rem;
-    gap: 20px;
+    gap: 10px;
     text-decoration: none;
     font-weight: 600;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: 0.1s ease-in-out;
-    color: #27374d;
     margin: 0 10px;
+    color: #27374d;
   }
-  
-  .admin-menu-list .admin-menu-item{
+  .admin-menu-item:hover{
     background: #27374d;
     color: #dde6ed;
   }
+ 

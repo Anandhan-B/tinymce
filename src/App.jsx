@@ -23,6 +23,7 @@ import Advertisement from "./Components/Advertisement/Advertisement";
 import AICreator from "./Components/AICreator/AICreator";
 import MailHistory from "./Components/MailHistory/MailHistory";
 import ExportData from "./Components/ExportData/ExportData";
+import Tasks from "./Components/Tasks/Tasks";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route Component={ProtectedRoute}>
           <Route path="/dashboard" Component={Dashboard}>
             <Route path="task-group" Component={TaskGroup} />
+            <Route path="task-group/:id" Component={Tasks} />
             <Route path="" Component={Tinymce} />
             <Route path="translate" Component={Translate} />
             <Route path="advertisement" Component={Advertisement} />

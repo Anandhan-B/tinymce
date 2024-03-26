@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
+import { Textarea } from "@mui/joy";
 import swal from 'sweetalert2';
 import axios from 'axios';
 import './tinymce.css'
@@ -20,6 +21,7 @@ const Tinymce = () => {
     const editorRef = useRef(null);
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
+    const [propMails, setPropMails] = useState('');
     const [loading, setLoading] = useState(false);
     
     const validateEmail = (email) => {
@@ -82,9 +84,23 @@ const Tinymce = () => {
   return (
     <>
     <form action="" onSubmit={sendMail}>
-      <div className="subject">
+      {/* <div className="subject">
         <input className='sub' type="text" onChange={(e)=> setSubject(e.target.value)} placeholder='Enter the Subject' required />
-    </div>
+    </div> */}
+    <Textarea
+      className="subject"
+      onChange={(e)=> setSubject(e.target.value)}
+      placeholder='Enter the Subject'
+      required
+      minRows={2}
+      maxRows={4}
+      endDecorator={
+        <Typography level="body-xs" sx={{ ml: 'auto' }}>
+          {subject.length} character(s)
+        </Typography>
+      }
+      sx={{ minWidth: 300 }}
+    />
     <div className="tinymce">
     <Editor
           
@@ -131,7 +147,23 @@ const Tinymce = () => {
         </div>
         
         <div className='sendto'>
-        <MyTextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} />
+        {/* <MyTextField id="outlined-basic" label="Send to" variant="outlined" type='email' required onChange={(e)=> setEmail(e.target.value)} /> */}
+        <Textarea
+          variant='outlined'
+          className=""
+          onChange={(e)=> setEmail(e.target.value)}
+          placeholder='Send To..'
+          value={propMails}
+          required
+          minRows={2}
+          maxRows={4}
+          endDecorator={
+            <Typography level="body-xs" sx={{ ml: 'auto' }}>
+              {subject.length} mail(s)
+            </Typography>
+          }
+          sx={{ minWidth: 300 }}
+        />
         <button className='box-btn' variant="contained" type='submit'>{loading ? <WhiteLoader/> : "Send"}</button> 
         </div>
         </form>

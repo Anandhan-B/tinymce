@@ -4,6 +4,7 @@ import { Textarea } from "@mui/joy";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { HiMiniSpeakerWave } from "react-icons/hi2";
+import { FaMicrophoneSlash, FaMicrophone } from "react-icons/fa";
 import axios from "axios";
 import swal from "sweetalert2";
 import { IoMdSwap } from "react-icons/io";
@@ -12,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
 const Translate = () => {
   const [from, setFrom] = useState("English");
@@ -20,6 +22,7 @@ const Translate = () => {
   const [output, setOutput] = useState("");
   const [copyClick, setCopyClick] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [listening, setListening] = useState(false)
   const translateLanguages = [
     "Afrikaans",
     "Albanian",
@@ -303,6 +306,37 @@ const Translate = () => {
     utterance.lang = languageTags[to];
     synth.speak(utterance);
   };
+  const listenToSpeech = async()=>{
+      recognition.lang = languageTags[from]; 
+      recognition.continuous= true;
+      recognition.interimResults = true;
+
+
+    recognition.onstart = function() {
+        setListening(true)
+    };
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        setText(transcript)
+    };
+
+    recognition.onerror = function(event) {
+      setListening(false)
+      swal.fire({
+        title:"Error",
+        text:"Error while listening speech, try again.",
+        icon:"error"
+      })
+    };
+
+    recognition.onend = function() {
+      setListening(false)
+    };
+
+    recognition.start()
+
+  }
 
   return (
     <>
@@ -355,6 +389,7 @@ const Translate = () => {
         <div className="translate-from">
           <Textarea
             required
+            value={text}
             onChange={(e) => setText(e.target.value)}
             className="box"
             minRows={10}
@@ -366,6 +401,11 @@ const Translate = () => {
               },
             }}
           />
+          <div className="speech-text">
+            {listening? <> <FaMicrophone onClick={()=> {
+            console.log("stop clicked")
+            recognition.stop()}}/> <small>Listening...</small></> : <FaMicrophoneSlash onClick={listenToSpeech}/> }
+          </div>
         </div>
         <div className="translate-btn">
           <button className="btn-tra" variant="contained" type="submit">
@@ -384,6 +424,7 @@ const Translate = () => {
           <Textarea
             className="box"
             value={output}
+            onChange={(e)=> setOutput(e.target.value)}
             minRows={10}
             maxRows={10}
             placeholder="Your output here..."

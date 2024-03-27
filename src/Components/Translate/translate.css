@@ -7,6 +7,12 @@
   gap: 10px;
   /* padding: 40px; */
 }
+.speech-text{
+  width: 95%;
+  margin: auto;
+  font-size: 20pt;
+}
+
 .dropdown-row{
   display: flex;
   justify-content: space-between;

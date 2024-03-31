@@ -1,6 +1,7 @@
 import React from "react";
 import "../Signup/Signup.css";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography, DialogTitle } from "@mui/material";
+import { Modal, ModalClose, ModalDialog } from "@mui/joy";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
@@ -10,6 +11,8 @@ import swal from 'sweetalert2';
 import { styled } from '@mui/system';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import WhiteLoader from '../WhiteLoader/WhiteLoader'
+import PasswordGenerator from "../PasswordGenerator/PasswordGenerator";
+import KeyIcon from '../../Assets/gold-key.png'
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -26,6 +29,7 @@ const Signup = () => {
   const [isDisabled,setIsDisabled]=useState(true);
   const [confirmPassword,setConfirmPassword]=useState(null);
   const [loading,setLoading]=useState(false);
+  const [modal,setModal] = useState(false)
 
   const validateEmail = (email) => {
     return String(email).toLowerCase().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -97,7 +101,7 @@ const handleVerificationSuccess = (token)=>{
 
   return (
     <>
-      <form id="body" onSubmit={createUser} >
+      <form id="body" onSubmit={createUser}>
         <Typography>
           <h2 id="h2-sign">Signup</h2>
           <div id="underline"></div>
@@ -117,7 +121,10 @@ const handleVerificationSuccess = (token)=>{
           }}
         />
 
-
+<span><Button sx={{position:"absolute",right:'40px',top:'40px',overflow:'hidden'}} variant="outlined" onClick={() => setModal(true)}>
+        <img className="psw-icon" src={KeyIcon} width="40px" height="40px" />&nbsp;
+        Password Generator <div className="shine-effect"></div>
+      </Button></span>
         <MyTextField
           id="pass-log"
           label="Password"
@@ -158,6 +165,32 @@ const handleVerificationSuccess = (token)=>{
             &nbsp; Login
           </Link>
         </div>
+        
+       <Modal
+       aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+        open={modal}
+        onClose={() => setModal(false)}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
+        <ModalDialog size="sm" sx={{
+          padding:'0',
+          margin:'0',
+          background:"white",
+          color:'#27374d'
+        }}
+        >
+          {/* <ModalClose variant="plain" sx={{ m: 1 }} /> */}
+          <DialogTitle sx={{
+          padding:'10px 20px'        }}
+          >
+            Create Strong Password
+          </DialogTitle>
+          <PasswordGenerator/>
+          
+        </ModalDialog>
+      </Modal> 
+   
       </form>
     </>
   );

@@ -1,8 +1,19 @@
 .taskgroup-container{
-    padding: 1rem;
+    padding:0 1rem 1rem;
 }
 .taskgroup-title{
     text-align: center;
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+    /* position: sticky;
+    top:0; */
+}
+
+.taskgroup-tools{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 .taskgroup-list{
     display: flex;
@@ -22,7 +33,7 @@
 }
 .group-title{
     font-weight: bold;
-    font-size: large;
+    font-size: medium;
     margin: 0 10px;
 }
 .add-group{

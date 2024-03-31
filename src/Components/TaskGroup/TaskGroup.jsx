@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./TaskGroup.css";
-import { FcFolder } from "react-icons/fc";
+import { FcFolder, FcSearch  } from "react-icons/fc";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
+import { styled } from '@mui/material/styles';
 import swal from "sweetalert2";
 import axios from "axios";
 import { Link } from 'react-router-dom'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TableFooter, TextField } from '@mui/material';
+import { Table, TableBody, TableCell,tableCellClasses, TableContainer, TableHead, TableRow, Paper, TablePagination, TableFooter, TextField } from '@mui/material';
 const TaskGroup = () => {
   const [data, setData] = useState([])
   const [toggle, setToggle] = useState(1)
@@ -99,39 +100,50 @@ const TaskGroup = () => {
       inputValidator: (value) => {
         return new Promise(async (resolve) => {
           if (!value) return resolve("Name cannot be empty");
-          addTaskGroup(value);
-          resolve();
+          addTaskGroup(value).then(resolve());
         });
       },
     });
   };
+
+
   
   return (
     <>
       <div className="taskgroup-container">
         <h1 className="taskgroup-title">Task Groups</h1>
-        <div onClick={addgroup} className="add-group">
-          <MdOutlineCreateNewFolder size={30} /> Add Task Group
-        </div>
-        <TextField
-        label="Search"
-        variant="outlined"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: '1rem' }}
-      />
         <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-          
-            <TableRow>
+        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead >
+              <TableCell sx={{paddingBottom:'0',paddingTop:'1rem'}}  colSpan={2}>
+          <div className="taskgroup-tools">
+            <div className="">
+              <span><FcSearch style={{fontSize: '20pt',padding:'.25rem'}}/></span>
+                <TextField size="small"
+              label="Search"
+              variant="outlined"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{ marginBottom: '1rem' }}
+            /></div>
+            <div className="add-group" onClick={addgroup}>
+              <MdOutlineCreateNewFolder size={30} /> Add Task Group
+            </div>
+          </div>
+          </TableCell>
+            <TableRow className="tg-tablehead">
               <TableCell>No</TableCell>
               <TableCell>Name</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => (
-              <TableRow key={i}>
+              <TableRow sx={{
+                '&:hover': {
+                  backgroundColor: '#f5f5f5',
+                  transition:'.4s',
+                },
+              }} key={i}>
                 <TableCell component="th" sx={{width:10}} scope="row">
                   {page * rowsPerPage + i + 1}
                 </TableCell>
@@ -139,7 +151,7 @@ const TaskGroup = () => {
                 <Link to={row._id}>
                   <FcFolder className="fc-group-icon" size={30} />
                   <span className="group-title">{row.groupName}</span>
-                  <small>{row.tasks.length} Tasks</small>
+                  <small style={{opacity:.7}}>{row.tasks.length} Tasks</small>
                   </Link>
                 </TableCell>
               </TableRow>

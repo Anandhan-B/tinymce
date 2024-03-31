@@ -23,6 +23,7 @@ const Translate = () => {
   const [copyClick, setCopyClick] = useState(false);
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false)
+  const [prevResult, setPrevResult] = useState('');
   const translateLanguages = [
     "Afrikaans",
     "Albanian",
@@ -314,15 +315,17 @@ const Translate = () => {
 
     recognition.onstart = function() {
         setListening(true)
+        setPrevResult(text)
     };
 
     recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript;
-        setText(transcript)
+        setText(`${prevResult} ${transcript}`)
     };
 
     recognition.onerror = function(event) {
       setListening(false)
+      console.log(event)
       swal.fire({
         title:"Error",
         text:"Error while listening speech, try again.",

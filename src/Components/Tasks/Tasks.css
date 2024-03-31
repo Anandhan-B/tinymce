@@ -1,38 +1,46 @@
-.taskgroup-container{
-    padding: 1rem;
+.tasks-container{
+    padding:0 1rem 1rem;
 }
-.taskgroup-title{
+.tasks-title{
     text-align: center;
+    font-size: 2rem;
+    margin: 0;
 }
-.taskgroup-list{
+.tasks-tools{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.tasks-list{
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
-.group-cell{
+.task-cell{
     padding-bottom: 10px;
 
 }
-.group-cell a{
+.task-cell a{
     text-decoration:none;
     color:black;
 }
-.fc-group-icon{
+.fc-task-icon{
     transform: translateY(9px);
 }
-.group-title{
+.task-title{
     font-weight: bold;
     font-size: large;
     margin: 0 10px;
 }
-.add-group{
+.add-task{
     display: flex;
     gap: 10px;
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
 }
-.taskgroup{
+.tasks{
     padding: .3rem;
     border-radius: 5px;
     display: flex;
@@ -41,10 +49,10 @@
     min-height: 2rem;
     align-items: center;
 }
-.folder-icon, .group-name{
+.folder-icon, .task-name{
     font-size: 1.3rem !important;
 } 
-.taskgroup:hover{
+.tasks:hover{
     background: #B9D9EB;
     transition: .4s;
 } 

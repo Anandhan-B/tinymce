@@ -1,3 +1,6 @@
 https://codepen.io/AdamMorsi/pen/mdqqpyX
 https://primereact.org/datatable/
 https://www.npmjs.com/package/primereact
+
+//Dependency
+@babel/plugin-proposal-private-property-in-object

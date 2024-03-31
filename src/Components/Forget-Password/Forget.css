@@ -1,7 +1,7 @@
 #forget-body{
     display: grid;
     place-content: center;
-    background: #dde6ed;
+    background: #d2dafa;
     min-height:100dvh;
 }
 #title{
@@ -25,7 +25,7 @@
     border-radius: 7px;
     align-items: center;
     justify-content: center;
-    box-shadow: rgb(245, 245, 245) 0px 5px 15px;
+    box-shadow: black 0px 5px 15px;
     opacity: 0.8;
     border-radius: 12px;
     width: 400px;

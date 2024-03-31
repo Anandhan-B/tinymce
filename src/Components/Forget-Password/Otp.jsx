@@ -5,6 +5,8 @@ import { MuiOtpInput } from 'mui-one-time-password-input';
 import { styled } from '@mui/system';
 import  axios from 'axios';
 import swal from 'sweetalert2'
+import  WhiteLoader from '../WhiteLoader/WhiteLoader'
+import SimpleLoader from '../SimpleLoader/SimpleLoader'
 
 
 
@@ -25,7 +27,10 @@ const MyMuiOtpInput = styled(MuiOtpInput)(({ theme }) => ({
 
 const Otp = () => {
   const [otp, setOtp] = useState('');
-  const [resendTime, setResendTime] = useState(60); 
+  const [resendTime, setResendTime] = useState(60);
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+ 
 
   const handleChange = (newValue) => {
     // Check if newValue is numeric before updating the state
@@ -42,13 +47,14 @@ const Otp = () => {
       icon: "error",
     });
     try {
+      setLoading2(true)
       const response = await axios.post(
         "http://localhost:7000/api/v1/user/reset-password",
         {
           email
         }
       );
-     
+      setLoading2(false)
       swal.fire({
         title: "Success",
         text: response.data.message,
@@ -57,6 +63,7 @@ const Otp = () => {
       
       setResendTime(60);
     } catch (error) {
+      setLoading2(false)
       if (error.response.status) {
         swal.fire({
           title: error.response.statusText,
@@ -93,9 +100,11 @@ const Otp = () => {
     if (!otp) return swal.fire('Error!', 'Fill the OTP field', 'error');
 
     try {
+      setLoading(true)
       const response = await axios.post(
         `http://localhost:7000/api/v1/user/reset-password/${otp}`,{email}
       );
+      setLoading(false)
       localStorage.setItem("resetToken",response.data.resetToken)
       swal.fire({
         title: "Success",
@@ -107,6 +116,7 @@ const Otp = () => {
       localStorage.removeItem("resetEmail")
       window.location.href = '/reset';
     } catch (error) {
+      setLoading(false)
       if (error.response.status) {
         swal.fire({
           title: error.response.statusText,
@@ -133,9 +143,6 @@ const Otp = () => {
           length={4}
           numInputs={4}
           onChange={handleChange}
-
-
-
         />
 
         <Button
@@ -144,7 +151,7 @@ const Otp = () => {
           type='submit'
          onClick={handleOtp} 
         >
-          Verify
+        { loading? <WhiteLoader/> : "Verify" }
         </Button>
 
         {resendTime === 0 && (
@@ -153,7 +160,7 @@ const Otp = () => {
             className='otp-resend'
             onClick={handleResend}
           >
-            Resend OTP
+            { loading2? <SimpleLoader/> : "Resend OTP"}
           </Button>
         )}
 

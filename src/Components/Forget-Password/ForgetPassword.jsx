@@ -6,7 +6,7 @@ import { Button, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import swal from 'sweetalert2';
 import axios from 'axios';
-
+import  WhiteLoader from '../WhiteLoader/WhiteLoader'
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -25,6 +25,7 @@ const MyTextField = styled(TextField)(({ theme }) => ({
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!email) {
@@ -38,13 +39,14 @@ const ForgetPassword = () => {
     }
 
     try {
+      setLoading(true)
       const response = await axios.post(
         "http://localhost:7000/api/v1/user/reset-password",
         {
           email
         }
       );
-     
+        setLoading(false)
       swal.fire({
         title: "Success",
         text: response.data,
@@ -56,6 +58,7 @@ const ForgetPassword = () => {
       localStorage.setItem("resetEmail",email) 
       window.location.href = '/otp';
     } catch (error) {
+      setLoading(false)
       if (error.response.status) {
         swal.fire({
           title: error.response.statusText,
@@ -94,7 +97,7 @@ const ForgetPassword = () => {
         />
 </div> 
       <Button id='for-btn' type="submit" variant="contained" onClick={handleSubmit}>
-        Submit
+        { loading? <WhiteLoader/> : "Submit" }
       </Button>
 
       {message && (

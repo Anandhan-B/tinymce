@@ -9,7 +9,6 @@ import {MdOutlineCreate, MdOutlineTranslate, MdOutlineDashboard, MdOutlineLogout
 
 
 const Sidebar = (props) => {
-  console.log("data :  ",props)
   return (
     <div className='body'>
       <div className='menu '>

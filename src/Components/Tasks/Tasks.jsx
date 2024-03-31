@@ -133,11 +133,10 @@ const Tasks = () => {
     
     return (
       <>
-        <div className="taskgroup-container">
-          <h1 className="taskgroup-title">{groupName} Tasks</h1>
-          <div onClick={addTasks} className="add-group">
-            <MdOutlineCreateNewFolder size={30} /> Add Task
-          </div>
+        <div className="tasks-container">
+          <h1 className="tasks-title">{groupName} Tasks</h1>
+          <div className="tasks-tools">
+          
           <TextField
           label="Search"
           variant="outlined"
@@ -145,6 +144,10 @@ const Tasks = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{ marginBottom: '1rem' }}
         />
+        <div onClick={addTasks} className="add-task">
+            <MdOutlineCreateNewFolder size={30} /> Add Task
+          </div>
+        </div>
           <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -161,8 +164,8 @@ const Tasks = () => {
                   <TableCell component="th" sx={{width:10}} scope="row">
                     {page * rowsPerPage + i + 1}
                   </TableCell>
-                  <TableCell className="group-cell">
-                    <span className="group-title">{row.name}</span>
+                  <TableCell className="task-cell">
+                    <span className="task-title">{row.name}</span>
                   </TableCell>
                   <TableCell>
                     {row.emails.join(",  ")}

@@ -1,7 +1,7 @@
 #otp-body{
     display: grid;
     place-content: center;
-    background: #dde6ed;
+    background: #d2dafa;
     min-height: 100dvh;
 }
 #otp{
@@ -13,7 +13,7 @@
     border-radius: 7px;
     align-items: center;
     justify-content: center;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     border-radius: 12px;
     height: 400px;
     width: 500px;
@@ -31,6 +31,7 @@
 }
 .otp-verify:hover{
     transform: scale(1.1);
+    transition: .4s;
     color: #dde6ed;
     background-color: #27374d;
 }

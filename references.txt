@@ -1,3 +1,6 @@
 https://codepen.io/AdamMorsi/pen/mdqqpyX
 https://primereact.org/datatable/
 https://www.npmjs.com/package/primereact
+
+https://www.npmjs.com/package/canva-editor
+https://www.npmjs.com/package/image-editor-mlx

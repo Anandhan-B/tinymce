@@ -7,6 +7,7 @@
 .aic-icon{
     font-size: 16pt;
 }
+
 .aic-tones, .aic-formats, .aic-result-div{
     border: solid rgb(27, 104, 219,.4) 2px;
     display: flex;

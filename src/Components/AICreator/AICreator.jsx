@@ -10,6 +10,11 @@ import { FaList, FaMagic } from "react-icons/fa";
 import { FaRegNewspaper } from "react-icons/fa6";
 import { TfiRuler } from "react-icons/tfi";
 import WhiteLoader from "../WhiteLoader/WhiteLoader";
+import { MdOutlineContentCopy } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
+import axios from 'axios'
+import swal from 'sweetalert2'
+import { Editor } from "primereact/editor";
 
 const AICreator = () => {
   const [query, setQuery] = useState("");
@@ -18,6 +23,8 @@ const AICreator = () => {
   const [activeLength, setActiveLength] = useState("given");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const [copyClick, setCopyClick] = useState(false);
+
   const generateDraft = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("bulkmailusertoken");
@@ -57,6 +64,16 @@ const AICreator = () => {
       }
     }
   };
+
+  const copyData = async () => {
+    if (!result) return swal.fire({ title: "No data to copy", icon: "info" });
+    await navigator.clipboard.writeText(result);
+    setCopyClick(true);
+    setTimeout(() => {
+      setCopyClick(false);
+    }, 3000);
+  };
+
   return (
     <>
       <form onSubmit={generateDraft} className="aic-container">
@@ -231,7 +248,7 @@ const AICreator = () => {
         </div>
         <div className="aic-submit">
           <Button type="submit" variant="contained" sx={{ width: "100%" }}>
-            Ask AI
+            { loading ? <WhiteLoader/> : "Ask AI" }
           </Button>
         </div>
         <br />
@@ -243,22 +260,11 @@ const AICreator = () => {
             <FaMagic className="aic-icon" /> <div>Preview</div>
           </div>
           <div className="aic-res">
-            <Textarea
-              className="aic-res-box"
-              onChange={(e) => setResult(e.target.value)}
-              placeholder="AI Generated Result"
-              value={result}
-              required
-              minRows={10}
-              maxRows={20}
-              endDecorator={
-                <Typography level="body-xs" sx={{ ml: "auto" }}>
-                  {query.length}/2000
-                </Typography>
-              }
-              sx={{ minWidth: 300 }}
-            />
+          <Editor value={result} readOnly /* onTextChange={(e) => setResult(e.htmlValue)} */ style={{ height: '320px' }} />
           </div>
+          <div className="copy" variant="contained" onClick={copyData}>
+              {copyClick ? <FaCheck /> : <MdOutlineContentCopy />}
+            </div>
         </div>
       </form>
     </>

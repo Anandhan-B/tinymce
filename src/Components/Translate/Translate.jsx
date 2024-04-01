@@ -315,7 +315,6 @@ const Translate = () => {
 
     recognition.onstart = function() {
         setListening(true)
-        setPrevResult(text)
     };
 
     recognition.onresult = function(event) {
@@ -335,6 +334,7 @@ const Translate = () => {
 
     recognition.onend = function() {
       setListening(false)
+      setPrevResult(text)
     };
 
     recognition.start()

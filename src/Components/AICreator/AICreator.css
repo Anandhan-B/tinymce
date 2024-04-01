@@ -1,0 +1,43 @@
+.aic-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+}
+.aic-icon{
+    font-size: 16pt;
+}
+.aic-tones, .aic-formats, .aic-result-div{
+    border: solid rgb(27, 104, 219,.4) 2px;
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 10px;
+}
+.aic-formats{
+    border: solid rgb(142, 36, 170,.4) 2px;
+}
+.aic-result-div{
+    border: solid rgba(0, 0, 0, 0.4) 2px;
+}
+.aic-tones-lists{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 500px;
+}
+.aic-formats-list{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+}
+.aic-big-icon{
+    font-size: 20pt;
+    padding: 1rem;
+}
+.tone-line{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}

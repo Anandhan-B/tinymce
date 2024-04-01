@@ -407,7 +407,7 @@ const Translate = () => {
           <div className="speech-text">
             {listening? <> <FaMicrophone onClick={()=> {
             console.log("stop clicked")
-            recognition.stop()}}/> <small>Listening...</small></> : <FaMicrophoneSlash onClick={listenToSpeech}/> }
+            recognition.stop()}}/> <small> Listening...</small></> : <FaMicrophoneSlash onClick={listenToSpeech}/> }
           </div>
         </div>
         <div className="translate-btn">

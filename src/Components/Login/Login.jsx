@@ -99,7 +99,7 @@ export const Login = () => {
           id="mail-log"
           label="Email"
           type="email "
-
+          autocomplete="off"
           required
           onChange={(e) => setEmail(e.target.value)}
           InputProps={{

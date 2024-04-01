@@ -8,4 +8,4 @@ https://www.npmjs.com/package/image-editor-mlx
 //Dependency
 @babel/plugin-proposal-private-property-in-object
 
-Next
+Next 2

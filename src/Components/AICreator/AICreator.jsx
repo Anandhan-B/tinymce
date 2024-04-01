@@ -13,9 +13,9 @@ import WhiteLoader from "../WhiteLoader/WhiteLoader";
 
 const AICreator = () => {
   const [query, setQuery] = useState("");
-  const [activeTone, setActiveTone] = useState("given");
-  const [activeFormat, setActiveFormat] = useState("given");
-  const [activeLength, setActiveLength] = useState("given");
+  const [activeTone, setActiveTone] = useState("based on question");
+  const [activeFormat, setActiveFormat] = useState("based on question");
+  const [activeLength, setActiveLength] = useState("based on question");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const generateDraft = async (e) => {

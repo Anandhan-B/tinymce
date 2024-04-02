@@ -4,9 +4,9 @@ import logo from '../../Assets/gold-key.png'
 // import { data } from './sampleData';
 // import { useState } from 'react';
 
- const editorConfig = {
+ /*const editorConfig = {
   logoUrl: logo,
- /* apis: {
+  apis: {
     url: 'http://localhost:4000/api',
     searchFonts: '/fonts',
     searchTemplates: '/templates',
@@ -30,8 +30,8 @@ import logo from '../../Assets/gold-key.png'
   editorAssetsUrl: 'http://localhost:4000/editor',
   imageKeywordSuggestions: 'animal,sport,love,scene,dog,cat,whale',
   templateKeywordSuggestions:
-    'mother,sale,discount,fashion,model,deal,motivation,quote',*/
-}; 
+    'mother,sale,discount,fashion,model,deal,motivation,quote',
+}; */
 
 const Advertisement = () => {
   /* const [saving, setSaving] = useState(false);
@@ -57,7 +57,7 @@ const Advertisement = () => {
   }; */
   return (
     <>
-       <CanvaEditor
+       {/* <CanvaEditor
       /* data={{
         name,
         editorConfig: data,
@@ -65,9 +65,14 @@ const Advertisement = () => {
       config={editorConfig}
       saving={saving}
       onChanges={handleOnChanges}
-      onDesignNameChanges={handleOnDesignNameChanges} */
+      onDesignNameChanges={handleOnDesignNameChanges} 
       config={editorConfig}
     />
+     */}
+
+     <iframe src="https://canva-editor-three.vercel.app/" style={{width:'100%',height:'85vh',position:'relative'}} frameborder="0">
+     </iframe>
+
     </>
   )
 }

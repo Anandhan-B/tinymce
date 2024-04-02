@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import { Textarea } from "@mui/joy";
+import { useLocation } from "react-router-dom";
 import swal from "sweetalert2";
 import axios from "axios";
 import "./tinymce.css";
@@ -23,7 +24,15 @@ const Tinymce = () => {
   const [subject, setSubject] = useState("");
   const [mailCount, setMailCount] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const location = useLocation()
+  useEffect(()=>{
+    console.log("noth", location);
+    if(location && location.state ){
+      const data = location.state.data
+      console.log(data);
+      setEmail(data.join(", "))
+    }
+  },[location])
   const validateEmail = (email) => {
     return String(email).trim()
       .toLowerCase()
@@ -95,6 +104,7 @@ const Tinymce = () => {
         <div className="mce-containers">
           <div className="mce-label"><h3>To:</h3></div>
           <Textarea
+          spellCheck='false'
             variant="outlined"
             onChange={(e) => {
               const value = e.target.value.split(",");

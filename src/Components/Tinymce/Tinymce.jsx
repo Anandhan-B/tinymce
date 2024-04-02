@@ -95,6 +95,7 @@ const Tinymce = () => {
         <div className="mce-containers">
           <div className="mce-label"><h3>To:</h3></div>
           <Textarea
+          spellCheck='false'
             variant="outlined"
             onChange={(e) => {
               const value = e.target.value.split(",");

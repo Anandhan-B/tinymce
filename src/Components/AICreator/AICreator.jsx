@@ -398,7 +398,7 @@ const AICreator = () => {
             </FormControl>
           </div>
         <div className="aic-submit">
-          <Button type="submit" variant="contained" sx={{ width: "100%" }}>
+          <Button type="submit" variant="contained" sx={{ width: "100%" , background:'#27374d'}}>
             { loading ? <WhiteLoader/> : "Ask AI" }
           </Button>
         </div>

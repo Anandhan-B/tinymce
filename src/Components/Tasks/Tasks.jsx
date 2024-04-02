@@ -5,7 +5,7 @@ import { MdOutlineCreateNewFolder } from "react-icons/md";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TableFooter, TextField } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TableFooter, TextField, Button } from '@mui/material';
 
 
 const Tasks = () => {
@@ -169,6 +169,9 @@ const Tasks = () => {
                   </TableCell>
                   <TableCell>
                     {row.emails.join(",  ")}
+                  </TableCell>
+                  <TableCell>
+                    <Button>Send Mail</Button>
                   </TableCell>
                 </TableRow>
               ))}

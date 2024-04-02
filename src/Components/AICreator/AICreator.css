@@ -9,15 +9,12 @@
 }
 
 .aic-tones, .aic-formats, .aic-result-div{
-    border: solid rgb(27, 104, 219,.4) 2px;
     display: flex;
     padding: 0.5rem;
     flex-direction: column;
     gap: 10px;
 }
-.aic-formats{
-    border: solid rgb(142, 36, 170,.4) 2px;
-}
+
 .aic-result-div{
     border: solid rgba(0, 0, 0, 0.4) 2px;
 }
@@ -34,7 +31,7 @@
     align-items: center;
 }
 .aic-big-icon{
-    font-size: 20pt;
+    font-size: 21pt;
     padding: 1rem;
 }
 .tone-line{

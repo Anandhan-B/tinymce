@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AICreator.css";
 import { Textarea } from "@mui/joy";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { FcSpeaker } from "react-icons/fc";
 import { BiNotepad } from "react-icons/bi";
 import { ImParagraphLeft } from "react-icons/im";
@@ -14,16 +14,128 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import axios from 'axios'
 import swal from 'sweetalert2'
-import { Editor } from "primereact/editor";
 
 const AICreator = () => {
   const [query, setQuery] = useState("");
-  const [activeTone, setActiveTone] = useState("based on question");
-  const [activeFormat, setActiveFormat] = useState("based on question");
-  const [activeLength, setActiveLength] = useState("based on question");
+  const [activeTone, setActiveTone] = useState(false);
+  const [activeFormat, setActiveFormat] = useState(false);
+  const [activeLength, setActiveLength] = useState(false);
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [copyClick, setCopyClick] = useState(false);
+  const [language, setLanguage] = useState("English");
+
+  const Languages = [
+    "Afrikaans",
+    "Albanian",
+    "Amharic",
+    "Arabic",
+    "Armenian",
+    "Azerbaijani",
+    "Basque",
+    "Belarusian",
+    "Bengali",
+    "Bosnian",
+    "Bulgarian",
+    "Catalan",
+    "Cebuano",
+    "Chichewa",
+    "Chinese (Simplified)",
+    "Chinese (Traditional)",
+    "Corsican",
+    "Croatian",
+    "Czech",
+    "Danish",
+    "Dutch",
+    "English",
+    "Esperanto",
+    "Estonian",
+    "Filipino",
+    "Finnish",
+    "French",
+    "Frisian",
+    "Galician",
+    "Georgian",
+    "German",
+    "Greek",
+    "Gujarati",
+    "Haitian Creole",
+    "Hausa",
+    "Hawaiian",
+    "Hebrew",
+    "Hindi",
+    "Hmong",
+    "Hungarian",
+    "Icelandic",
+    "Igbo",
+    "Indonesian",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Javanese",
+    "Kannada",
+    "Kazakh",
+    "Khmer",
+    "Kinyarwanda",
+    "Korean",
+    "Kurdish (Kurmanji)",
+    "Kyrgyz",
+    "Lao",
+    "Latin",
+    "Latvian",
+    "Lithuanian",
+    "Luxembourgish",
+    "Macedonian",
+    "Malagasy",
+    "Malay",
+    "Malayalam",
+    "Maltese",
+    "Maori",
+    "Marathi",
+    "Mongolian",
+    "Myanmar (Burmese)",
+    "Nepali",
+    "Norwegian",
+    "Odia (Oriya)",
+    "Pashto",
+    "Persian",
+    "Polish",
+    "Portuguese",
+    "Punjabi",
+    "Romanian",
+    "Russian",
+    "Samoan",
+    "Scots Gaelic",
+    "Serbian",
+    "Sesotho",
+    "Shona",
+    "Sindhi",
+    "Sinhala",
+    "Slovak",
+    "Slovenian",
+    "Somali",
+    "Spanish",
+    "Sundanese",
+    "Swahili",
+    "Swedish",
+    "Tajik",
+    "Tamil",
+    "Tatar",
+    "Telugu",
+    "Thai",
+    "Turkish",
+    "Turkmen",
+    "Ukrainian",
+    "Urdu",
+    "Uyghur",
+    "Uzbek",
+    "Vietnamese",
+    "Welsh",
+    "Xhosa",
+    "Yiddish",
+    "Yoruba",
+    "Zulu",
+  ];
 
   const generateDraft = async (e) => {
     e.preventDefault();
@@ -34,7 +146,7 @@ const AICreator = () => {
       setLoading(true)
       const response = await axios.post(
         "http://localhost:7000/api/v1/user/aicreator",
-        { prompt: query, tone: activeTone, format: activeFormat, length: activeLength },
+        { prompt: query, tone: activeTone, format: activeFormat, length: activeLength, language },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -163,6 +275,10 @@ const AICreator = () => {
           <div className="aic-tones-lists">
             <div className="aic-formats-list">
               <Button
+              sx={{
+                padding:'1rem',
+                fontSize:'20pt'
+              }}
                 variant={
                   activeFormat === "Paragraph" ? "contained" : "outlined"
                 }
@@ -177,6 +293,10 @@ const AICreator = () => {
 
             <div className="aic-formats-list">
               <Button
+              sx={{
+                padding:'1rem',
+                fontSize:'20pt'
+              }}
                 variant={activeFormat === "Email" ? "contained" : "outlined"}
                 className="aic-big-icon"
                 color="secondary"
@@ -189,6 +309,10 @@ const AICreator = () => {
 
             <div className="aic-formats-list">
               <Button
+              sx={{
+                padding:'1rem',
+                fontSize:'20pt'
+              }}
                 variant={activeFormat === "Ideas" ? "contained" : "outlined"}
                 className="aic-big-icon"
                 color="secondary"
@@ -201,6 +325,10 @@ const AICreator = () => {
 
             <div className="aic-formats-list">
               <Button
+              sx={{
+                padding:'1rem',
+                fontSize:'20pt'
+              }}
                 variant={
                   activeFormat === "Blog Post" ? "contained" : "outlined"
                 }
@@ -246,11 +374,35 @@ const AICreator = () => {
             </div>
           </div>
         </div>
+        <div className="aic-lang-dropdown">
+            <span>Language: </span>
+            <FormControl sx={{ m: 1, minWidth: 80 }}>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Language
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                autoWidth
+                required
+                label="Language"
+                size="small"
+              >
+                
+                {Languages.map((lang) => (
+                  <MenuItem value={lang}>{lang}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
         <div className="aic-submit">
           <Button type="submit" variant="contained" sx={{ width: "100%" }}>
             { loading ? <WhiteLoader/> : "Ask AI" }
           </Button>
         </div>
+        
         <br />
         <br />
         <br />
@@ -260,7 +412,20 @@ const AICreator = () => {
             <FaMagic className="aic-icon" /> <div>Preview</div>
           </div>
           <div className="aic-res">
-          <Editor value={result} readOnly /* onTextChange={(e) => setResult(e.htmlValue)} */ style={{ height: '320px' }} />
+            <Textarea
+            className="aic-res-box"
+            onChange={(e) => setResult(e.target.value)}
+            placeholder="AI Generated Response"
+            value={result}
+            minRows={10}
+            maxRows={20}
+            endDecorator={
+              <Typography level="body-xs" sx={{ ml: "auto" }}>
+                {result.length}/2000
+              </Typography>
+            }
+            sx={{ minWidth: 300 }}
+          />
           </div>
           <div className="copy" variant="contained" onClick={copyData}>
               {copyClick ? <FaCheck /> : <MdOutlineContentCopy />}

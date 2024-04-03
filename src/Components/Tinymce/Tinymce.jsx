@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
 import { TextField, Button, Typography } from "@mui/material";
+import { FiUpload } from "react-icons/fi";
 import { Textarea } from "@mui/joy";
 import { useLocation } from "react-router-dom";
 import swal from "sweetalert2";
@@ -24,15 +25,15 @@ const Tinymce = () => {
   const [subject, setSubject] = useState("");
   const [mailCount, setMailCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const location = useLocation()
+  const { state } = useLocation()
   useEffect(()=>{
-    console.log("noth", location);
-    if(location && location.state ){
-      const data = location.state.data
-      console.log(data);
-      setEmail(data.join(", "))
+    console.log("noth", state);
+    if(state){
+      console.log(state);
+      setEmail(state)
+      countMail(state)
     }
-  },[location])
+  },[state])
   const validateEmail = (email) => {
     return String(email).trim()
       .toLowerCase()
@@ -118,9 +119,14 @@ const Tinymce = () => {
             minRows={2}
             maxRows={4}
             endDecorator={
+              <>
               <Typography level="body-xs" sx={{ ml: "auto" }}>
                 {mailCount} mail(s)
-              </Typography>
+              </Typography>&nbsp;&nbsp;
+              <label><FiUpload/>
+                <input type="file" name="" id="" accept=".csv" style={{display:'none'}} />
+              </label>
+              </>
             }
             sx={{ minWidth: 300 }}
           />

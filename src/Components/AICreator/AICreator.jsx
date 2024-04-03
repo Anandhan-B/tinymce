@@ -142,6 +142,8 @@ const AICreator = () => {
     const token = localStorage.getItem("bulkmailusertoken");
     if (!token)
       return swal.fire("Error", "Session Expired, try again later", "error");
+    if (!(query.trim()))
+      return swal.fire("Hey!", "Ask Something to AI 🙃", "info");
     try {
       setLoading(true)
       const response = await axios.post(
@@ -398,7 +400,7 @@ const AICreator = () => {
             </FormControl>
           </div>
         <div className="aic-submit">
-          <Button type="submit" variant="contained" sx={{ width: "100%" , background:'#27374d'}}>
+          <Button type="submit" variant="contained" className="aic-submit-btn" sx={{ width: "100%" , background:'#27374d'}}>
             { loading ? <WhiteLoader/> : "Ask AI" }
           </Button>
         </div>

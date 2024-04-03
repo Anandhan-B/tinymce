@@ -186,12 +186,10 @@ const Tasks = () => {
                     <TableCell>{row.emails.join(",  ")}</TableCell>
                     <TableCell>
                       <Link
-                        to={{
-                          pathname: "/dashboard",
-                          state: row.emails ,
-                        }}
+                        to="/dashboard"
+                        state={row.emails}
                       >
-                        <Button onClick={()=>{console.log("roo",row.emails);}}>Send Mail</Button>
+                        <Button>Send Mail</Button>
                       </Link>
                     </TableCell>
                   </TableRow>

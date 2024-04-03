@@ -8,6 +8,10 @@
     font-size: 16pt;
 }
 
+.aic-submit-btn:hover{
+    background: #27374d !important;
+}
+
 .aic-tones, .aic-formats, .aic-result-div{
     display: flex;
     padding: 0.5rem;

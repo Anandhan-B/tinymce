@@ -10,6 +10,7 @@ import axios from "axios";
 import "./tinymce.css";
 import { styled } from "@mui/system";
 import WhiteLoader from "../WhiteLoader/WhiteLoader";
+import SimpleLoader from '../SimpleLoader/SimpleLoader'
 
 const MyTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
@@ -25,6 +26,7 @@ const Tinymce = () => {
   const [subject, setSubject] = useState("");
   const [mailCount, setMailCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [upLoading, setUPLoading] = useState(false);
   const { state } = useLocation()
   useEffect(()=>{
     console.log("noth", state);
@@ -99,6 +101,44 @@ const Tinymce = () => {
     }
   };
 
+  const readCSV = async (e) => {
+    try{
+    const file = e.target.files[0]
+    const token = localStorage.getItem("bulkmailusertoken");
+    if (!token)
+      return swal.fire("Error", "Session Expired, try again later", "error");
+    setUPLoading(true)
+    const emails = [];
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const content = e.target.result;
+      const rows = content.split("\n");
+      rows.forEach((row) => {
+        const rowData = row.split(",");
+        rowData.map((data) => {
+          if (validateEmail(data)) emails.push(data);
+        });
+      });
+      setUPLoading(false)
+      if (emails.length === 0){
+        return swal.fire("Not Found", "No Emails found in the file", "info");
+      }
+      setEmail(prev => `${prev} , ${emails}`,()=>countMail(emails))
+      
+    }
+    reader.onerror = (e)=>{
+      setUPLoading(false)
+      return swal.fire("Can't read File", "An error accured when reading file", "error");
+    }
+    reader.readAsText(file);
+    }
+    catch(err){
+      setUPLoading(false)
+      return swal.fire("Can't read File", "An error accured when reading file", "error");
+
+    }
+  };
+
   return (
     <>
       <form action="" onSubmit={sendMail}>
@@ -123,8 +163,8 @@ const Tinymce = () => {
               <Typography level="body-xs" sx={{ ml: "auto" }}>
                 {mailCount} mail(s)
               </Typography>&nbsp;&nbsp;
-              <label><FiUpload/>
-                <input type="file" name="" id="" accept=".csv" style={{display:'none'}} />
+              <label>{ upLoading? <SimpleLoader/> : <FiUpload/>}
+                <input type="file" name="" id="" accept=".csv" onChange={readCSV} style={{display:'none'}} />
               </label>
               </>
             }

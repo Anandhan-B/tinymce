@@ -22,7 +22,7 @@ const MyTextField = styled(TextField)(({ theme }) => ({
 
 const Tinymce = () => {
   const editorRef = useRef(null);
-  const [email, setEmail] = useState([]);
+  const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [mailCount, setMailCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -123,7 +123,7 @@ const Tinymce = () => {
       if (emails.length === 0){
         return swal.fire("Not Found", "No Emails found in the file", "info");
       }
-      setEmail(prev => `${prev} , ${emails}`,()=>countMail(emails))
+      setEmail(prev => `${prev? prev+", ":""}${emails}`,()=>countMail(emails))
       
     }
     reader.onerror = (e)=>{

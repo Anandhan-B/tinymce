@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Tasks.css";
-import { FcFolder } from "react-icons/fc";
+import { FcSearch } from "react-icons/fc";
 import { MdOutlineCreateNewFolder } from "react-icons/md";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import SimpleLoader from '../SimpleLoader/SimpleLoader'
 import {
   Table,
   TableBody,
@@ -26,6 +27,9 @@ const Tasks = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
   const [groupName, setGroupName] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { id } = useParams();
 
   const handleChangePage = (event, newPage) => {
@@ -45,6 +49,7 @@ const Tasks = () => {
       if (!token)
         return swal.fire("Error", "Session Expired, try again later", "error");
       try {
+        setLoading(true)
         const response = await axios.get(
           `http://localhost:7000/api/v1/user/taskgroup/${id}`,
           {
@@ -53,9 +58,11 @@ const Tasks = () => {
             },
           }
         );
+        setLoading(false)
         setData(response.data.tasks);
         setGroupName(response.data.groupName);
       } catch (error) {
+        setLoading(false)
         if (error.response.status) {
           swal.fire({
             title: error.response.statusText,
@@ -95,6 +102,7 @@ const Tasks = () => {
       if (emails.length === 0)
         return swal.fire("Not Found", "No Emails found in the file", "info");
       try {
+        setAdding(true)
         const response = await axios.post(
           "http://localhost:7000/api/v1/user/task",
           {
@@ -109,12 +117,14 @@ const Tasks = () => {
           }
         );
         setToggle((pre) => pre + 1);
+        setAdding(false)
         swal.fire({
           title: "Success",
           text: response.data,
           icon: "success",
         });
       } catch (error) {
+        setAdding(false)
         if (error.response && error.response.status) {
           swal.fire({
             title: error.response.statusText,
@@ -151,29 +161,43 @@ const Tasks = () => {
     <>
       <div className="tasks-container">
         <h1 className="tasks-title">{groupName} Tasks</h1>
-        <div className="tasks-tools">
-          <TextField
+        
+        <TableContainer component={Paper}>
+          <Table size="small" sx={{ Width: '100%' }} aria-label="simple table">
+            <TableHead>
+            <TableCell sx={{paddingBottom:'0',paddingTop:'1rem'}}  colSpan={4}>
+          <div className="tasks-tools">
+            <div className="">
+              <span><FcSearch style={{fontSize: '20pt',padding:'.25rem'}}/></span>
+              <TextField
+              size="small"
             label="Search"
             variant="outlined"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{ marginBottom: "1rem" }}
-          />
-          <div onClick={addTasks} className="add-task">
+          /></div>
+          {adding ? <div className="add-group">
+              <SimpleLoader /> Adding...
+            </div>:
+            <div onClick={addTasks} className="add-task">
             <MdOutlineCreateNewFolder size={30} /> Add Task
+          </div>}
           </div>
-        </div>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
+          </TableCell>
               <TableRow>
                 <TableCell>No</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Emails</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData
+              {loading?<TableRow><TableCell></TableCell><TableCell></TableCell>
+            <TableCell > <SimpleLoader/> </TableCell><TableCell></TableCell>
+            </TableRow> : filteredData.length === 0? <TableRow><TableCell></TableCell><TableCell></TableCell>
+            <TableCell > No Task Here </TableCell><TableCell></TableCell>
+            </TableRow> :filteredData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, i) => (
                   <TableRow key={i}>

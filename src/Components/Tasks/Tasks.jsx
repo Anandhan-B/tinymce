@@ -40,8 +40,11 @@ const Tasks = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const filteredData = data.filter((row) =>
-    row.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = data.filter((row) =>{
+    const name = row.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const emails = row.emails.join(",").toLowerCase().includes(searchTerm.toLowerCase())
+    return name || emails
+  }
   );
   useEffect(() => {
     const fetchData = async () => {

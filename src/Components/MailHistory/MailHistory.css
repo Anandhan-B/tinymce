@@ -1,0 +1,57 @@
+.history-container{
+    padding:0 1rem 1rem;
+}
+.history-title{
+    text-align: center;
+    font-size: 2rem;
+}
+.history-tools{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.history-list{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.his-cell{
+    padding-bottom: 10px;
+
+}
+.his-cell a{
+    text-decoration:none;
+    color:black;
+}
+.fc-history-icon{
+    transform: translateY(9px);
+}
+.his-title{
+    font-weight: bold;
+    font-size: large;
+    margin: 0 10px;
+}
+.add-history{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+.history{
+    padding: .3rem;
+    border-radius: 5px;
+    display: flex;
+    gap:1rem;
+    cursor: pointer;
+    min-height: 2rem;
+    align-items: center;
+}
+.folder-icon, .history-name{
+    font-size: 1.3rem !important;
+} 
+.history:hover{
+    background: #B9D9EB;
+    transition: .4s;
+} 

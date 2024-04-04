@@ -1,0 +1,57 @@
+.user-management-container{
+    padding:0 1rem 1rem;
+}
+.user-management-title{
+    text-align: center;
+    font-size: 2rem;
+}
+.user-management-tools{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-management-list{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.um-cell{
+    padding-bottom: 10px;
+
+}
+.um-cell a{
+    text-decoration:none;
+    color:black;
+}
+.fc-user-management-icon{
+    transform: translateY(9px);
+}
+.um-title{
+    font-weight: bold;
+    font-size: medium;
+    margin: 0 10px;
+}
+.add-user{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+.user-management{
+    padding: .3rem;
+    border-radius: 5px;
+    display: flex;
+    gap:1rem;
+    cursor: pointer;
+    min-height: 2rem;
+    align-items: center;
+}
+.folder-icon, .user-management-name{
+    font-size: 1.3rem !important;
+} 
+.user-management:hover{
+    background: #B9D9EB;
+    transition: .4s;
+} 

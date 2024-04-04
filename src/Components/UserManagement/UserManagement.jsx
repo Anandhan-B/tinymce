@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./MailHistory.css";
+import React,{useEffect, useState} from 'react'
+import './UserManagement.css'
 import { FcSearch } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
 import { RiDeleteBin2Line } from "react-icons/ri";
-import { AiOutlineExport } from "react-icons/ai";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import SimpleLoader from "../SimpleLoader/SimpleLoader";
-import { mkConfig, generateCsv, download } from 'export-to-csv';
 import {
   Table,
   TableBody,
@@ -23,7 +21,8 @@ import {
   Button,
 } from "@mui/material";
 
-const MailHistory = () => {
+
+const UserManagement = () => {
   const [data, setData] = useState([]);
   const [toggle, setToggle] = useState(1);
   const [page, setPage] = useState(0);
@@ -31,7 +30,6 @@ const MailHistory = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [exporting, setExporting] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -42,21 +40,20 @@ const MailHistory = () => {
     setPage(0);
   };
   const filteredData = data.filter((row) => {
-    const window = row.window.toLowerCase().includes(searchTerm.toLowerCase());
-    const action = row.action.toLowerCase().includes(searchTerm.toLowerCase());
-    const status = row.status.toLowerCase().includes(searchTerm.toLowerCase());
-    const time = row.time.toLowerCase().includes(searchTerm.toLowerCase());
-    return window || action || status || time;
+    const name = row.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const email = row.email.toLowerCase().includes(searchTerm.toLowerCase());
+   
+    return name || email ;
   });
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("bulkmailusertoken");
+      const token = localStorage.getItem("bulkmailadmintoken");
       if (!token)
         return swal.fire("Error", "Session Expired, try again later", "error");
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:7000/api/v1/user/history/`,
+          `http://localhost:7000/api/v1/admin/alluser/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -88,14 +85,14 @@ const MailHistory = () => {
       );
   };
 
-  const delHis = async (id) => {
-    const token = localStorage.getItem("bulkmailusertoken");
+  const delUsr = async (id) => {
+    const token = localStorage.getItem("bulkmailadmintoken");
     if (!token)
       return swal.fire("Error", "Session Expired, try again later", "error");
     try {
       setDeleting(true);
       const response = await axios.delete(
-        `http://localhost:7000/api/v1/user/history/${id}`,
+        `http://localhost:7000/api/v1/admin/deleteuser/${id}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -122,7 +119,7 @@ const MailHistory = () => {
       }
     }
   };
-  const deleteHistory = async (id) => {
+  const deleteUser = async (id) => {
     swal
       .fire({
         title: "Are you sure?",
@@ -135,46 +132,15 @@ const MailHistory = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          delHis(id);
+          delUsr(id);
         }
       });
   };
-  const formatTime = (timestamp) => {
-    const date = new Date(timestamp);
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    const ampm = hours >= 12 ? "PM" : "AM";
-
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-
-    const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${
-      day < 10 ? "0" : ""
-    }${day}`;
-    const formattedTime = `${hours < 10 ? "0" : ""}${hours}:${
-      minutes < 10 ? "0" : ""
-    }${minutes}:${seconds < 10 ? "0" : ""}${seconds} ${ampm}`;
-
-    return `Date:${formattedDate}\nTime:${formattedTime}`;
-  };
-  const exportHistory = ()=>{
-    const csvConfig = mkConfig({
-      fieldSeparator: ',',
-      useKeysAsHeaders: true,
-    });
-    const csv = generateCsv(csvConfig)(data);
-    download(csvConfig)(csv);
-  }
+  
   return (
     <>
-      <div className="history-container">
-        <h1 className="history-title">Usage History</h1>
+      <div className="user-management-container">
+        <h1 className="user-management-title">User Management</h1>
 
         <TableContainer component={Paper}>
           <Table size="small" sx={{ Width: "100%" }} aria-label="simple table">
@@ -183,7 +149,7 @@ const MailHistory = () => {
                 sx={{ paddingBottom: "0", paddingTop: "1rem" }}
                 colSpan={6}
               >
-                <div className="history-tools">
+                <div className="user-management-tools">
                   <div className="">
                     <span>
                       <FcSearch
@@ -199,26 +165,18 @@ const MailHistory = () => {
                       style={{ marginBottom: "1rem" }}
                     />
                   </div>
-                  <div className="export-history-btn">
-                    
-                    <Button startIcon={<AiOutlineExport/>} onClick={exportHistory}>{ exporting? <SimpleLoader/>:"Export"}</Button>
-                  </div>
                 </div>
               </TableCell>
               <TableRow>
                 <TableCell>No</TableCell>
-                <TableCell>Window</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
                 <TableCell>Action</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Time</TableCell>
-                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
                   <TableCell></TableCell>
                   <TableCell>
                     {" "}
@@ -230,11 +188,10 @@ const MailHistory = () => {
               ) : filteredData.length === 0 ? (
                 <TableRow>
                   <TableCell></TableCell>
+                  <TableCell> No User Here </TableCell>
                   <TableCell></TableCell>
                   <TableCell></TableCell>
-                  <TableCell> No History Here </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
+
                 </TableRow>
               ) : (
                 filteredData
@@ -244,18 +201,16 @@ const MailHistory = () => {
                       <TableCell component="th" sx={{ width: 10 }} scope="row">
                         {page * rowsPerPage + i + 1}
                       </TableCell>
-                      <TableCell className="his-cell">
-                        <span className="his-title">{row.window}</span>
+                      <TableCell className="um-cell">
+                        <span className="um-title">{row.name}</span>
                       </TableCell>
-                      <TableCell>{row.action}</TableCell>
-                      <TableCell>{row.status}</TableCell>
-                      <TableCell>{formatTime(row.time)}</TableCell>
+                      <TableCell>{row.email}</TableCell>
                       <TableCell>
                         {deleting ? (
                           <SimpleLoader />
                         ) : (
-                          <Button onClick={() => deleteHistory(row._id)}>
-                            <MdDeleteForever  style={{color:'red',fontSize:'2rem'}}/>
+                          <Button onClick={() => deleteUser(row._id)}>
+                            <MdDeleteForever style={{color:'red',fontSize:'2rem'}}/>
                           </Button>
                         )}
                       </TableCell>
@@ -280,7 +235,7 @@ const MailHistory = () => {
         </TableContainer>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default MailHistory;
+export default UserManagement

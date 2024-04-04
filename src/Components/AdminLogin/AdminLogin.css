@@ -1,0 +1,83 @@
+#body{
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    gap: 15px;
+    margin: 0%;
+    padding: 0;
+    background-color: #dde6ed;
+}
+#h2-log-ad{
+    font-size: 35px;
+    position: relative;
+    bottom: 40px;
+    left: 30px;
+    width: 300px;
+    height: 40px;
+    margin: auto;
+    color:#27374d;
+}
+#underline{
+    position: relative;
+    bottom: 30px;
+    width: 58px;
+    height: 4px;
+    background-color:#27374d;
+    border-radius: 9px;
+    margin: auto;
+}
+#mail-log{
+    width: 250px;
+}
+#chk-log{
+    position: relative;
+    left: 5px;
+    bottom: 16px;
+    
+}
+#rem-log{
+    position: relative;
+    bottom: 44px;
+    left: 24px;
+}
+#log-rc-flex{
+    display: flex;
+    flex-wrap:wrap ;
+    justify-content: space-between;
+}
+
+#lock{
+    color:#27374d;
+}
+#fgt{
+    text-align: end;
+    text-decoration: none;
+    position: relative;
+    top: -10px;
+    color:  #27374d;
+    font-weight: 600;
+}
+#btn{
+    width: 110px;
+    height: 40px;
+    margin: auto;
+    position: relative;
+    bottom: 35px;
+    color: #dde6ed;
+    background-color: #27374d;
+}
+
+#dont-log{
+    position: relative;
+    bottom: 30px;
+}
+#log-signup{
+    position: relative;
+    bottom: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color:  #27374d;
+}
+#aup-log{
+    margin: auto;
+}

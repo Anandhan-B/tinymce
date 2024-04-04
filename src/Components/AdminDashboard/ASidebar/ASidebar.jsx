@@ -2,6 +2,7 @@ import React from 'react'
 import './ASidebar.css'
 import {MdOutlineAdminPanelSettings , MdOutlineLogout} from 'react-icons/md'
 import { RiShieldUserLine } from 'react-icons/ri'
+import {NavLink } from 'react-router-dom'
 
 
 
@@ -19,17 +20,15 @@ const ASidebar = () => {
 {/* Sidebar--Start */}
 
         <div className='admin-menu-list'>
-          <a href='#' className='admin-menu-item'>
+          <NavLink to='' className='admin-menu-item' end>
             <RiShieldUserLine className='icon'/>
             User-Management
-          </a>
-        </div>  
-
-        <div className='admin-menu-list'>
-          <a href='#' className='admin-menu-item'>
+          </NavLink>
+        
+          <NavLink end to='/admin' onClick={()=> localStorage.removeItem("bulkmailadmintoken")} className='admin-menu-item'>
            <MdOutlineLogout className='icon'/> 
             Logout
-          </a>
+          </NavLink>
         </div>
 
       </div>

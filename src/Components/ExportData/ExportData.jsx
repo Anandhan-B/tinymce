@@ -1,8 +1,12 @@
-import React from 'react'
+import React,{useState} from 'react'
+import {Button} from '@mui/material'
 
 const ExportData = () => {
   return (
-    <div>ExportData</div>
+    <>
+      <h1>Export History</h1>
+
+    </>
   )
 }
 

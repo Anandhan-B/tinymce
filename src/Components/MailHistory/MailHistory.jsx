@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./MailHistory.css";
 import { FcSearch } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
+import { RiDeleteBin2Line } from "react-icons/ri";
 import swal from "sweetalert2";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -239,7 +240,7 @@ const MailHistory = () => {
                           <SimpleLoader />
                         ) : (
                           <Button onClick={() => deleteHistory(row._id)}>
-                            <MdDeleteForever style={{color:'red',fontSize:'2rem'}}/>
+                            <RiDeleteBin2Line style={{color:'red',fontSize:'2rem'}}/>
                           </Button>
                         )}
                       </TableCell>

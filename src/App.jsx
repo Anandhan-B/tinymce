@@ -6,6 +6,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ProgressBar, hideBar, showBar } from "top-loading-progress-bar";
 import Tinymce from "./Components/Tinymce/Tinymce";
 import Chatgpt from "./Components/Chatgpt/Chatgpt";
 import Translate from "./Components/Translate/Translate";
@@ -32,6 +33,7 @@ import UserManagement from './Components/UserManagement/UserManagement'
 const App = () => {
   return (
     <>
+    <ProgressBar color="#27374d" height="5px"/>
       <Routes>
         <Route Component={AuthCheck}>
           <Route path="/" Component={Login} />

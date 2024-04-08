@@ -4,12 +4,15 @@ import "./ExportData.css";
 import jspdf from "jspdf";
 import "jspdf-autotable";
 import SimpleLoader from "../SimpleLoader/SimpleLoader";
+import { mkConfig, generateCsv, download } from 'export-to-csv';
 import swal from 'sweetalert2'
 import axios from 'axios'
 
 const ExportData = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [exportingCSV, setExportingCSV] = useState(false);
+  const [exportingPDF, setExportingPDF] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,22 +48,38 @@ const ExportData = () => {
   }, []);
 
   const generatePDF = async () => {
+    setExportingPDF(true)
     const doc = new jspdf();
     doc.autoTable({
       head: [['No','Window','Action','Status','Time']],
       body: data.map((row,i) => [i+1,row.window,row.action,row.status,row.time]),
     });
     doc.save("history.pdf")
+    setExportingPDF(false)
+
   };
+
+  const exportHistory = ()=>{
+    setExportingCSV(true)
+    const csvConfig = mkConfig({
+      fieldSeparator: ',',
+      useKeysAsHeaders: true,
+    });
+    const csv = generateCsv(csvConfig)(data);
+    download(csvConfig)(csv);
+    setExportingCSV(false)
+
+  }
+
   return (
     <>
       <div className="export-container">
         <h1>Export History</h1>
-        {loading? <SimpleLoader/> : <><Button variant="outlined" color="success">
-          Export CSV
+        {loading? <SimpleLoader/> : <><Button variant="outlined" onClick={exportHistory} color="success">
+          { exportingCSV? <SimpleLoader/> : "Export CSV"}
         </Button>
         <Button variant="outlined" color="error" onClick={generatePDF}>
-          Export PDF
+        { exportingPDF? <SimpleLoader/> : "Export PDF"}
         </Button></>}
       </div>
     </>

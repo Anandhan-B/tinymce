@@ -85,6 +85,7 @@ const Tinymce = () => {
           });
         } catch (error) {
           setLoading(false);
+          console.log(error)
           if (error.response.status) {
             swal.fire({
               title: error.response.statusText,
@@ -139,8 +140,8 @@ const Tinymce = () => {
       if (emails.length === 0){
         return swal.fire("Not Found", "No Emails found in the file", "info");
       }
-      setEmail(prev => `${prev? prev+", ":""}${emails}`,()=>countMail(emails))
-      
+      setEmail(emails)
+      countMail(emails)
     }
     reader.onerror = (e)=>{
       setUPLoading(false)
@@ -209,7 +210,7 @@ const Tinymce = () => {
         <div className="mce-grow">
           <Editor
             onInit={(evt, editor) => (editorRef.current = editor)}
-            apiKey="5z1bza2sxo65yy46a26rsn1wjdnf7iheokvzvyib1i89mn2y"
+            apiKey="vf3181bvhyx0uuq6oepbu23e03g6do2lw5hsytreiq1u1ezu"
             init={{
               plugins:
                 "ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss",

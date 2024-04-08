@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef } from "react";
 import { TextField, Button, Typography } from "@mui/material";
 import { FiUpload } from "react-icons/fi";
+import { MdAddBox } from "react-icons/md";
 import { Textarea } from "@mui/joy";
 import { useLocation } from "react-router-dom";
 import swal from "sweetalert2";
@@ -24,9 +25,11 @@ const Tinymce = () => {
   const editorRef = useRef(null);
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
+  const [attachments, setAttachments] = useState(null);
   const [mailCount, setMailCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [upLoading, setUPLoading] = useState(false);
+  const [attachName, setAttachName] = useState("");
   const { state } = useLocation()
   useEffect(()=>{
     console.log("noth", state);
@@ -63,9 +66,10 @@ const Tinymce = () => {
         console.log(validMails);
         try {
           setLoading(true);
+
           const response = await axios.post(
             "http://localhost:7000/api/v1/user/mail",
-            { email: validMails, subject, content },
+            { email: validMails, subject, content, attachments, attachName},
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -101,6 +105,18 @@ const Tinymce = () => {
       }
     }
   };
+
+  const checkFileSize = (e) => {
+    const file = e.target.files[0];
+    const maxSize = 25 * 1024 * 1024; 
+  
+    if (file && file.size > maxSize) {
+      swal.fire('File Too Large','File size exceeds the limit (25MB). Please choose a smaller file.','warning');
+      e.target.value = '';
+      return true
+    }
+    return false
+  }
 
   const readCSV = async (e) => {
     try{
@@ -247,6 +263,28 @@ const Tinymce = () => {
           />
           </div>
         </div>
+        <div className="mce-containers">
+        <div className="mce-label"><h3>Attach:</h3></div>
+          <label>
+            <div style={{fontSize:'30pt',color:'#27374d',cursor:'pointer'}}><MdAddBox/></div>
+          <input type="file" onChange={(e)=> {
+            if(checkFileSize(e)) return
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = async () => {
+              try {
+                const fileData = reader.result.split(',')[1];
+                setAttachments(fileData)
+                setAttachName(e.target.files[0].name)
+              } catch (error) {
+                swal.fire('','Error reading file','info');
+              }
+            };
+            
+          }} hidden /> {attachName}
+          </label>
+        </div>
+
 
         <div className="sendto">
           <button className="box-btn" variant="contained" type="submit">

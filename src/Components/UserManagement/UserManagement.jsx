@@ -30,6 +30,7 @@ const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [deleting, setDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -136,7 +137,64 @@ const UserManagement = () => {
         }
       });
   };
-  
+  const addUser = async () => {
+    const { value: groupName } = await swal.fire({
+      title: "Enter Email and Password",
+      html: `
+            <input placeholder="Enter Email" id="swal-input1" class="swal2-input">
+            <input placeholder="Enter Password" id="swal-input2" class="swal2-input">
+            
+        `,
+      showCancelButton: true,
+      focusConfirm: false,
+      preConfirm: async () => {
+        const email = document.getElementById("swal-input1").value;
+        const password = document.getElementById("swal-input2").value;
+        if (!(email && password))
+          return swal.fire("Error", "Input all fields", "error");
+        await addUs(email, password);
+      },
+    });
+  };
+
+  const addUs = async (email, password) => {
+    const token = localStorage.getItem("bulkmailadmintoken");
+    if (!token)
+      return swal.fire("Error", "Session Expired, try again later", "error");
+    try {
+        setAdding(true)
+        const response = await axios.post(
+          "http://localhost:7000/api/v1/admin/newuser",
+          {
+            email,
+            password
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setToggle((pre) => pre + 1);
+        setAdding(false)
+        swal.fire({
+          title: "Success",
+          text: response.data,
+          icon: "success",
+        });
+      } catch (error) {
+        setAdding(false)
+        if (error.response && error.response.status) {
+          swal.fire({
+            title: error.response.statusText,
+            text: error.response.data,
+            icon: "error",
+          });
+        } else {
+          swal.fire({ title: "Error", text: error.message, icon: "error" });
+        }
+      }
+  };
   return (
     <>
       <div className="user-management-container">
@@ -165,6 +223,12 @@ const UserManagement = () => {
                       style={{ marginBottom: "1rem" }}
                     />
                   </div>
+                  {adding ? <div className="add-group">
+              <SimpleLoader /> Adding...
+            </div>:
+            <div onClick={addUser} className="add-task">
+            <Button> Add User</Button>
+          </div>}
                 </div>
               </TableCell>
               <TableRow>
